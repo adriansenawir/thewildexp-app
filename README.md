@@ -1,1 +1,1 @@
-"# thewildexperimenters-app" 
+"# thewildexp-app" 
