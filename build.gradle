@@ -1,0 +1,31 @@
+plugins {
+  id 'application'
+  id 'org.openjfx.javafxplugin' version '0.0.13'
+}
+
+repositories {
+    // Use jcenter for resolving dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+}
+
+dependencies {
+    // This dependency is used by the application.
+    implementation 'com.google.guava:guava:29.0-jre'
+
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.13'
+
+    //cetakan
+    implementation 'org.apache.pdfbox:pdfbox:2.0.26'
+}
+
+javafx {
+    version = "17"
+    modules = [ 'javafx.controls' ]
+}
+
+application {
+    // Define the main class for the application.
+    mainClassName = 'sebersih.App'
+}
