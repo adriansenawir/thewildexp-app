@@ -9,27 +9,15 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.common.PDRectangle;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 
 public class App extends Application {
@@ -132,7 +120,7 @@ public class App extends Application {
         clear.setFont(new Font("Forte", 20));
         clear.setStyle("-fx-background-radius: 20; -fx-cursor: hand;");
         clear.setOnAction(e -> {
-            struk();
+            sceneTransaksi();
         });
         gridpaneatas.add(clear, 1, 0);
         GridPane.setValignment(clear, VPos.CENTER);
@@ -148,166 +136,5 @@ public class App extends Application {
         primaryStage.show();
 
     }
-
-    private void struk() {
-        // Membuat tampilan kertas pada scene
-        GridPane gridPane = new GridPane();
-        gridPane.setAlignment(Pos.CENTER);
-        gridPane.setPadding(new Insets(20));
-        gridPane.setVgap(10);
-    
-        // Membuat label dan mengatur propertinya
-        Label label1 = new Label("No. Transaksi:");
-        Label label2 = new Label("Tanggal:");
-        Label label3 = new Label("Item:");
-        Label label4 = new Label("Total:");
-        label1.setFont(new Font("Arial", 14));
-        label2.setFont(new Font("Arial", 14));
-        label3.setFont(new Font("Arial", 14));
-        label4.setFont(new Font("Arial", 14));
-    
-        // Membuat text field untuk menampilkan data pada label
-        TextField textField1 = new TextField();
-        TextField textField2 = new TextField();
-        TextField textField3 = new TextField();
-        TextField textField4 = new TextField();
-        textField1.setEditable(false);
-        textField2.setEditable(false);
-        textField3.setEditable(false);
-        textField4.setEditable(false);
-    
-        // Menambahkan label dan text field pada grid pane
-        gridPane.add(label1, 0, 0);
-        gridPane.add(textField1, 1, 0);
-        gridPane.add(label2, 0, 1);
-        gridPane.add(textField2, 1, 1);
-        gridPane.add(label3, 0, 2);
-        gridPane.add(textField3, 1, 2);
-        gridPane.add(label4, 0, 3);
-        gridPane.add(textField4, 1, 3);
-    
-        // Membuat button "Masuk"
-        Button masukButton = new Button("Masuk");
-        masukButton.setFont(new Font("Arial", 14));
-        masukButton.setOnAction(e -> selesai());
-    
-        // Menambahkan button pada grid pane
-        gridPane.add(masukButton, 0, 4, 2, 1);
-        GridPane.setHalignment(masukButton, HPos.CENTER);
-    
-        // Mengatur posisi grid pane pada scene
-        VBox layout = new VBox();
-        layout.setAlignment(Pos.CENTER);
-        layout.getChildren().add(gridPane);
-    
-        // Membuat scene baru dan menampilkannya pada primary stage
-        Scene scene = new Scene(layout, 400, 600);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-    
-    private void selesai() {
-        // Membuat tampilan kertas margin
-        GridPane gridPane = new GridPane();
-        gridPane.setAlignment(Pos.CENTER);
-        gridPane.setPadding(new Insets(20));
-        gridPane.setStyle("-fx-background-color: white;");
-    
-        // Menambahkan konten pada kertas margin
-        Label titleLabel = new Label("Kertas Margina");
-        titleLabel.setFont(new Font("Arial", 24));
-        Label contentLabel = new Label("Ini adalah konten yang akan dicetak pada kertas margin.");
-        contentLabel.setFont(new Font("Arial", 16));
-    
-        // Menambahkan konten pada grid pane
-        gridPane.add(titleLabel, 0, 0);
-        gridPane.add(contentLabel, 0, 1);
-    
-        // Membuat button "Cetak"
-        Button cetakButton = new Button("Cetak");
-        cetakButton.setFont(new Font("Arial", 14));
-        cetakButton.setOnAction(e -> saveAsPDF());
-    
-        // Menambahkan button pada grid pane
-        gridPane.add(cetakButton, 0, 2);
-        GridPane.setHalignment(cetakButton, HPos.CENTER);
-    
-        // Mengatur posisi grid pane pada scene
-        VBox layout = new VBox();
-        layout.setAlignment(Pos.CENTER);
-        layout.getChildren().add(gridPane);
-    
-        // Membuat scene baru dan menampilkannya pada primary stage
-        Scene scene = new Scene(layout, 400, 600);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-    
-    private void saveAsPDF() {
-        // Membuat dokumen PDF
-        PDDocument document = new PDDocument();
-    
-        try {
-            // Membuat halaman baru
-            PDPage page = new PDPage(PDRectangle.A4);
-            document.addPage(page);
-    
-            // Membuat konten stream untuk halaman
-            PDPageContentStream contentStream = new PDPageContentStream(document, page);
-    
-            // Menambahkan konten pada halaman
-            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 24);
-            contentStream.beginText();
-            contentStream.newLineAtOffset(50, 700);
-            contentStream.showText("SEBERIH SHOES & CARE");
-            contentStream.showText("nanan");
-            contentStream.endText();
-    
-            contentStream.setFont(PDType1Font.HELVETICA, 16);
-            contentStream.beginText();
-            contentStream.newLineAtOffset(50, 650);
-            contentStream.showText("Ini adalah konten yang akan dicetak pada kertas margin.");
-            contentStream.endText();
-    
-            // Menutup konten stream
-            contentStream.close();
-    
-            // Menyimpan dokumen sebagai file PDF
-            document.save("kertas_margin.pdf");
-
-            
-    
-            // Menampilkan dialog konfirmasi
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Informasi");
-            alert.setHeaderText(null);
-            alert.setContentText("Kertas margin telah disimpan sebagai file PDF.");
-            alert.showAndWait();
-        } catch (IOException e) {
-            // Menampilkan pesan error jika terjadi kesalahan
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Terjadi kesalahan saat menyimpan dokumen sebagai file PDF.");
-            alert.showAndWait();
-            e.printStackTrace();
-        } finally {
-            // Menutup dokumen
-            try {
-                document.close();
-            } catch (IOException e) {
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("Terjadi kesalahan saat menutup dokumen.");
-                alert.showAndWait();
-                e.printStackTrace();
-            }
-        }
-    }
-    
-    
-
-
 
 }
