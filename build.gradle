@@ -27,7 +27,7 @@ javafx {
 
 application {
     // Define the main class for the application.
-    mainClassName = 'sebersih.App'
+    mainClassName = 'sebersih.Apps'
 }
 
 mainClassName = 'sebersih.App'
