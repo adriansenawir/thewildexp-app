@@ -29,3 +29,14 @@ application {
     // Define the main class for the application.
     mainClassName = 'sebersih.App'
 }
+
+mainClassName = 'sebersih.App'
+jar {
+    duplicatesStrategy = 'exclude'
+    manifest {
+        attributes 'Main-Class': 'sebersih.Launcher'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
