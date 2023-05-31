@@ -98,7 +98,7 @@ public class App extends Application {
         gridpaneatas.setAlignment(Pos.TOP_CENTER);
         gridpaneatas.setHgap(130); // mengatur jarak dari sel horizontal (BACK & CLEAR)
         gridpaneatas.setVgap(15); // mengatur jarak dari sel vertikal
-        gridpaneatas.setPadding(new Insets(20, 20, 20, 20)); // mengatur jarak dari scene
+        gridpaneatas.setPadding(new Insets(20, 20, 5, 20)); // mengatur jarak dari scene
 
         // Button back & gambarnya
         InputStream inputLogoBack = getClass().getResourceAsStream("/image/back.png");
@@ -110,6 +110,8 @@ public class App extends Application {
 
         Button back = new Button("Back", logokembali);
         back.setFont(new Font("Forte", 20));
+        // back.setMaxHeight(15);
+        // back.setMaxWidth(15);
         back.setStyle("-fx-background-radius: 20; -fx-cursor: hand;");
         back.setOnAction(e -> {
             menuUtama();
@@ -210,20 +212,29 @@ public class App extends Application {
         daftar4.add(hargaButton4, 1, 0);
         GridPane.setValignment(hargaButton4, VPos.CENTER);
 
-        //buat button ke scene selanjutnya
-        
-
         //info harga button
         totalLabel = new Label("Total: Rp." + totalHarga);
         totalLabel.setFont(new Font("ARIAL", 20));
         totalLabel.setAlignment(Pos.BOTTOM_CENTER);
+
+        //button scene ke menu berikutnya
+        InputStream inputlogosave = getClass().getResourceAsStream("/image/save.png");
+        Image urlsave = new Image(inputlogosave);
+        ImageView logo2 = new ImageView(urlsave);
+        logo2.setFitHeight(50);
+        logo2.setFitWidth(50);
+
+        Button buttoncetak = new Button("Cetak");
+        buttoncetak.setAlignment(Pos.BOTTOM_RIGHT);
+        GridPane.setValignment(buttoncetak, VPos.BOTTOM);
+
 
         //vbox
         VBox layout = new VBox();
         layout.setStyle("-fx-background-color: #5F9EA0;");
         // layout.setAlignment(Pos.TOP_CENTER);
         // layout.setPadding(new Insets(2));
-        layout.getChildren().addAll(gridpaneatas,daftar1,daftar2,daftar3,daftar4, totalLabel);
+        layout.getChildren().addAll(gridpaneatas,daftar1,daftar2,daftar3,daftar4, totalLabel,buttoncetak);
 
         Scene scene = new Scene(layout, 400, 600);
 
