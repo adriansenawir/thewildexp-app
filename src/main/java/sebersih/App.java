@@ -1,8 +1,7 @@
 package sebersih;
 
 import java.io.InputStream;
-// import java.util.HashMap;
-// import java.util.Map;
+
 import java.text.DecimalFormat;
 
 import javafx.application.Application;
@@ -16,21 +15,14 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-// import javafx.scene.layout.HBox;
-// import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class App extends Application {
     private Stage primaryStage;
-    // private Map<String, Double> hargaPencucian;
     private int totalHarga = 0;
     private Label totalLabel;
-
-    // private Label totalHargaLabel;
-    // private double totalHarga;
-    // private Map<String, Integer> jumlahKlik;
 
     public static void main(String[] args) {
         launch(args);
@@ -71,15 +63,19 @@ public class App extends Application {
         InputStream inputlogo = getClass().getResourceAsStream("/image/keranjang.png");
         Image url1 = new Image(inputlogo);
         ImageView logo1 = new ImageView(url1);
-        // logo1.setImage(url1);
         logo1.setFitHeight(100);
         logo1.setFitWidth(100);
 
         Button keranjang = new Button("MASUK", logo1);
         keranjang.setFont(new Font("Forte", 15));
-        keranjang.setStyle("-fx-background-radius: 180; -fx-pref-width: 180px; -fx-pref-height: 180px; -fx-cursor: hand;");
+        keranjang.setStyle("-fx-background-color: #BB9F31; -fx-background-radius: 480; -fx-pref-width: 180px; -fx-pref-height: 180px; -fx-cursor: hand;");
         keranjang.setAlignment(Pos.CENTER);
-        // keranjang.setOnMouseClicked(null);
+        keranjang.setOnMouseEntered(e -> {
+            keranjang.setStyle("-fx-background-color: #000000;-fx-background-radius: 180; -fx-pref-width: 180px; -fx-pref-height: 180px; -fx-cursor: hand;");
+        });
+        keranjang.setOnMouseExited(e -> {
+            keranjang.setStyle("-fx-background-color: #BB9F31; -fx-background-radius: 180; -fx-pref-width: 180px; -fx-pref-height: 180px; -fx-cursor: hand;");
+        });
         keranjang.setOnAction(e -> {
             sceneMenu();
         });
@@ -214,6 +210,9 @@ public class App extends Application {
         daftar4.add(hargaButton4, 1, 0);
         GridPane.setValignment(hargaButton4, VPos.CENTER);
 
+        //buat button ke scene selanjutnya
+        
+
         //info harga button
         totalLabel = new Label("Total: Rp." + totalHarga);
         totalLabel.setFont(new Font("ARIAL", 20));
@@ -238,83 +237,14 @@ public class App extends Application {
 
             hargaButton.setOnAction(e -> {
                 totalHarga += harga;
-                DecimalFormat decimalFormat = new DecimalFormat("#,##0");
+                DecimalFormat decimalFormat = new DecimalFormat("#.##0");
                 String formattedTotalHarga = decimalFormat.format(totalHarga);
                 totalLabel.setText("Total: Rp." + formattedTotalHarga);
             });
             return hargaButton;
         }
 
-    //     VBox layout = new VBox();
-    //     layout.setStyle("-fx-background-color: #5F9EA0;");
-    //     layout.setAlignment(Pos.TOP_CENTER);
-    //     layout.getChildren().addAll(gridpaneatas);
+    private void struk(){
 
-    //     Scene scene = new Scene(layout, 400, 600);
-    //     primaryStage.setScene(scene);
-    //     primaryStage.show();
-
-
-    // }
+    }
 }
-        // buatanku
-
-        // hargaPencucian = new HashMap<>();
-        // hargaPencucian.put("Normal Wash\nRp", 10.0);
-        // hargaPencucian.put("Deep Clean", 15.0);
-        // hargaPencucian.put("Dry Clean", 20.0);
-        // hargaPencucian.put("Suede Cleaning", 25.0);
-
-        // jumlahKlik = new HashMap<>();
-        // jumlahKlik.put("Normal Wash\nRp", 0);
-        // jumlahKlik.put("Deep Clean", 0);
-        // jumlahKlik.put("Dry Clean", 0);
-        // jumlahKlik.put("Suede Cleaning", 0);
-
-        // // Membuat layout utama
-        // VBox root = new VBox(10);
-        // root.setPadding(new Insets(20));
-        // root.setAlignment(Pos.CENTER);
-
-        // // Menambahkan judul
-        // Label titleLabel = new Label("Jenis Pencucian");
-        // titleLabel.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
-        // root.getChildren().add(titleLabel);
-
-        // // Menambahkan grid pane untuk menu pencucian
-        // GridPane gridPane = new GridPane();
-        // gridPane.setHgap(20);
-        // gridPane.setVgap(20);
-        // gridPane.setAlignment(Pos.CENTER);
-
-        
-
-
-        // Menambahkan grid pane ke dalam layout utama
-        // root.getChildren().add(gridPane);
-
-        // // Menambahkan label total harga
-        // Label totalLabel = new Label("Total Harga:");
-        // totalHargaLabel = new Label("0.0");
-        // totalHargaLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-
-        // HBox totalHargaBox = new HBox(10);
-        // totalHargaBox.getChildren().addAll(totalLabel, totalHargaLabel);
-        // totalHargaBox.setAlignment(Pos.CENTER);
-
-        // root.getChildren().add(totalHargaBox);
-
-        // layout.getChildren().add(root);
-
-    // private void tambahHarga(String jenisPencucian) {
-    //     double harga = hargaPencucian.get(jenisPencucian);
-    //     int klik = jumlahKlik.get(jenisPencucian);
-    //     klik++;
-    //     jumlahKlik.put(jenisPencucian, klik);
-    //     totalHarga += harga;
-    //     totalHargaLabel.setText(String.format("%.2f", totalHarga));
-    //     System.out.println("Jenis Pencucian: " + jenisPencucian);
-
-    // }
-
-
