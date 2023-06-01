@@ -28,8 +28,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
-import javafx.scene.control.Button;
+
 
 public class App extends Application {
     private Stage primaryStage;
@@ -59,17 +58,17 @@ public class App extends Application {
         labelkasir.setAlignment(Pos.TOP_CENTER);
 
         // logo
-        InputStream inputstream = getClass().getResourceAsStream("/image/logo.png");
+        InputStream inputstream = getClass().getResourceAsStream("/image/logosebersih.png");
         Image url = new Image(inputstream);
         ImageView logo = new ImageView(url);
         
         // logo.setImage(url);
-        logo.setFitHeight(90);
-        logo.setFitWidth(220);
+        logo.setFitHeight(200);
+        logo.setFitWidth(200);
 
         // label sebersih
-        Label labelsebersih = new Label("SEBERSIH SHOES & CARE");
-        labelsebersih.setFont(new Font(18));
+        Label labelsebersih = new Label("''Berusahalah untuk tidak menjadi sukses\ntapi berusahalah untuk menjadi bernilai''");
+        labelsebersih.setFont(new Font(14));
         labelsebersih.setStyle("-fx-font-weight: bold; ");
         labelsebersih.setAlignment(Pos.TOP_CENTER);
 
@@ -77,6 +76,7 @@ public class App extends Application {
         InputStream inputlogo = getClass().getResourceAsStream("/image/keranjang.png");
         Image url1 = new Image(inputlogo);
         ImageView logo1 = new ImageView(url1);
+
         logo1.setFitHeight(200);
         logo1.setFitWidth(200);
 
@@ -116,6 +116,19 @@ public class App extends Application {
         });
         login.setOnMouseExited(e -> {
         login.setStyle("-fx-background-color: #BB9F31; -fx-background-radius: 180; -fx-pref-width: 120px; -fx-pref-height: 50px; -fx-cursor: hand;");
+        logo1.setFitHeight(50);
+        logo1.setFitWidth(50);
+
+        Button keranjang = new Button();
+        // keranjang.setFont(new Font("Forte", 15));
+        keranjang.setGraphic(logo1);
+        keranjang.setStyle("-fx-background-color: #105A86; -fx-background-radius: 480; -fx-pref-width: 50px; -fx-pref-height: 50px; -fx-cursor: hand;");
+        keranjang.setAlignment(Pos.CENTER);
+        keranjang.setOnMouseEntered(e -> {
+            keranjang.setStyle("-fx-background-color: #000000;-fx-background-radius: 180; -fx-pref-width: 50px; -fx-pref-height: 50px; -fx-cursor: hand;");
+        });
+        keranjang.setOnMouseExited(e -> {
+            keranjang.setStyle("-fx-background-color: #105A86; -fx-background-radius: 180; -fx-pref-width: 50px; -fx-pref-height: 50px; -fx-cursor: hand;");
         });
         login.setOnAction(e -> {
             sceneMenu();
@@ -133,23 +146,45 @@ public class App extends Application {
 
     // membuat ketentuan tampilan
         VBox layout = new VBox();
-        layout.setStyle("-fx-background-color: #5F9EA0; ");
+        layout.setStyle("-fx-background-color: #CACDCB; ");
         layout.setAlignment(Pos.TOP_CENTER);
         layout.setSpacing(20);
         layout.getChildren().addAll(labelkasir, logo, logo1, labelsebersih, usernameLayout, passwordLayout, login);
 
     
 
-        Scene scene = new Scene(layout, 400, 660);
+        Scene scene = new Scene(layout, 400, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+        ) ;
+}
 
     public void sceneMenu() {
+        // transaksi top
+        GridPane palingatas = new GridPane();
+        palingatas.setAlignment(Pos.TOP_LEFT);
+        palingatas.setPadding(new Insets(10));
+        palingatas.setStyle("-fx-background-color: #A1ABB6");
+        palingatas.setPrefWidth(400);
+        palingatas.setHgap(10);
+        
+        Label labeltransaksi = new Label("TRANSAKSI BARU");
+        labeltransaksi.setFont(new Font(15));
+        labeltransaksi.setStyle("-fx-font-family: Fire wall; -fx-font-weight: bold; ");
+        palingatas.add(labeltransaksi, 2,2);
+
+        InputStream inputlogouser = getClass().getResourceAsStream("/image/user.png");
+        Image urluser = new Image(inputlogouser);
+        ImageView logouser = new ImageView(urluser);
+        logouser.setFitHeight(20);
+        logouser.setFitWidth(20);
+        palingatas.add(logouser, 20,2);
+
         // bentuk yang bersampingan
         GridPane gridpaneatas = new GridPane();
         gridpaneatas.setAlignment(Pos.TOP_CENTER);
-        gridpaneatas.setHgap(130); // mengatur jarak dari sel horizontal (BACK & CLEAR)
+        gridpaneatas.setHgap(160); // mengatur jarak dari sel horizontal (BACK & CLEAR)
         gridpaneatas.setVgap(15); // mengatur jarak dari sel vertikal
         gridpaneatas.setPadding(new Insets(20, 20, 5, 20)); // mengatur jarak dari scene
 
@@ -158,14 +193,12 @@ public class App extends Application {
         Image url1 = new Image(inputLogoBack);
         ImageView logokembali = new ImageView(url1);
         logokembali.setImage(url1);
-        logokembali.setFitHeight(35);
-        logokembali.setFitWidth(35);
+        logokembali.setFitHeight(25);
+        logokembali.setFitWidth(25);
 
         Button back = new Button("Back", logokembali);
-        back.setFont(new Font("Forte", 20));
-        // back.setMaxHeight(15);
-        // back.setMaxWidth(15);
-        back.setStyle("-fx-background-radius: 20; -fx-cursor: hand;");
+        back.setFont(new Font("Forte", 15));
+        back.setStyle("-fx-background-radius: 15; -fx-text-fill: white; -fx-cursor: hand; -fx-background-color: #105A86; ");
         back.setOnAction(e -> {
             menuUtama();
         });
@@ -176,12 +209,12 @@ public class App extends Application {
         Image url2 = new Image(inputLogoClear);
         ImageView logoclear = new ImageView(url2);
         logoclear.setImage(url2);
-        logoclear.setFitHeight(35);
-        logoclear.setFitWidth(35);
+        logoclear.setFitHeight(25);
+        logoclear.setFitWidth(25);
 
         Button clear = new Button("Clear", logoclear);
-        clear.setFont(new Font("Forte", 20));
-        clear.setStyle("-fx-background-radius: 20; -fx-cursor: hand;");
+        clear.setFont(new Font("Forte", 15));
+        clear.setStyle("-fx-background-radius: 15; -fx-text-fill: white; -fx-cursor: hand; -fx-background-color: #105A86; ");
         clear.setOnAction(e -> {
             totalHarga = 0;
             sceneMenu();
@@ -192,13 +225,13 @@ public class App extends Application {
         // List 1
         GridPane daftar1 = new GridPane();
         daftar1.setAlignment(Pos.TOP_LEFT);
-        daftar1.setHgap(130);
+        daftar1.setHgap(150);
         daftar1.setVgap(15);
-        daftar1.setPadding(new Insets(20, 20, 20, 20));
+        daftar1.setPadding(new Insets(30, 20, 20, 39));
 
         Label namaDaftar1 = new Label("Clean Wash Easy \n Rp. 30.000");
         namaDaftar1.setFont(new Font("ROCKWELL", 15));
-        namaDaftar1.setStyle("-fx-font-weight: bold; ");
+        namaDaftar1.setStyle("-fx-font-weight: bold; -fx-cursor: hand;");
         namaDaftar1.setAlignment(Pos.TOP_LEFT);
         daftar1.add(namaDaftar1, 0, 0);
         GridPane.setHalignment(namaDaftar1, HPos.CENTER);
@@ -213,13 +246,13 @@ public class App extends Application {
         //list 2
         GridPane daftar2 = new GridPane();
         daftar2.setAlignment(Pos.TOP_LEFT);
-        daftar2.setHgap(130);
+        daftar2.setHgap(150);
         daftar2.setVgap(15);
-        daftar2.setPadding(new Insets(20, 20, 20, 20));
+        daftar2.setPadding(new Insets(20, 20, 20, 39));
 
         Label namaDaftar2 = new Label("Clean Wash Hard \n Rp. 35.000");
         namaDaftar2.setFont(new Font("ROCKWELL", 15));
-        namaDaftar2.setStyle("-fx-font-weight: bold; ");
+        namaDaftar2.setStyle("-fx-font-weight: bold; -fx-cursor: hand; ");
         namaDaftar2.setAlignment(Pos.TOP_LEFT);
         daftar2.add(namaDaftar2, 0, 0);
         GridPane.setHalignment(namaDaftar2, HPos.CENTER);
@@ -232,13 +265,13 @@ public class App extends Application {
         //list 3
         GridPane daftar3 = new GridPane();
         daftar3.setAlignment(Pos.TOP_LEFT);
-        daftar3.setHgap(173);
+        daftar3.setHgap(193);
         daftar3.setVgap(15);
-        daftar3.setPadding(new Insets(20, 20, 20, 20));
+        daftar3.setPadding(new Insets(20, 20, 20, 39));
 
         Label namaDaftar3 = new Label("Flash Wash \n Rp. 25.000");
         namaDaftar3.setFont(new Font("ROCKWELL", 15));
-        namaDaftar3.setStyle("-fx-font-weight: bold; ");
+        namaDaftar3.setStyle("-fx-font-weight: bold; -fx-cursor: hand;");
         namaDaftar3.setAlignment(Pos.TOP_LEFT);
         daftar3.add(namaDaftar3, 0, 0);
         GridPane.setHalignment(namaDaftar3, HPos.CENTER);
@@ -251,13 +284,13 @@ public class App extends Application {
         //list 4
         GridPane daftar4 = new GridPane();
         daftar4.setAlignment(Pos.TOP_LEFT);
-        daftar4.setHgap(178);
+        daftar4.setHgap(198);
         daftar4.setVgap(15);
-        daftar4.setPadding(new Insets(20, 20, 20, 20));
+        daftar4.setPadding(new Insets(20, 20, 20, 39));
 
         Label namaDaftar4 = new Label("Kids Shoes \n Rp. 20.000");
         namaDaftar4.setFont(new Font("ROCKWELL", 15));
-        namaDaftar4.setStyle("-fx-font-weight: bold; ");
+        namaDaftar4.setStyle("-fx-font-weight: bold; -fx-cursor: hand;");
         namaDaftar4.setAlignment(Pos.TOP_LEFT);
         daftar4.add(namaDaftar4, 0, 0);
         GridPane.setHalignment(namaDaftar4, HPos.CENTER);
@@ -268,15 +301,24 @@ public class App extends Application {
         GridPane.setValignment(hargaButton4, VPos.CENTER);
 
         //info harga button
+        GridPane total = new GridPane();
+        total.setAlignment(Pos.BOTTOM_CENTER);
+        total.getHgap();
+        total.getVgap();
+        total.setPadding(new Insets(18, 0, 20, 0));
+        // total.setStyle("-fx-background-color: #A1ABB6");
+        
+
         totalLabel = new Label("Total: Rp." + totalHarga);
         totalLabel.setFont(new Font("ARIAL", 20));
         totalLabel.setAlignment(Pos.BOTTOM_CENTER);
+        total.add(totalLabel, 0, 0);
+        totalLabel.setStyle("-fx-background-color: #A1ABB6; -fx-padding: 10px; -fx-background-radius: 10;");
 
         // Label to display on the receipt
         Label strukLabel = new Label();
         strukLabel.setFont(new Font("Arial", 15));
         strukLabel.setStyle("-fx-font-weight: bold; ");
-        // strukPane.add(strukLabel, 0, 3, 2, 1);
 
         //button scene ke menu berikutnya
         InputStream inputlogosave = getClass().getResourceAsStream("/image/save.png");
@@ -285,20 +327,21 @@ public class App extends Application {
         logo2.setFitHeight(50);
         logo2.setFitWidth(50);
 
-        Button buttoncetak = new Button("Cetak");
-        buttoncetak.setAlignment(Pos.BOTTOM_RIGHT);
-        // GridPane.setValignment(buttoncetak, VPos.BOTTOM);
+        Button buttoncetak = new Button();
+        buttoncetak.setStyle("-fx-background-color: #394867; -fx-cursor: hand; ");
+        buttoncetak.setAlignment(Pos.BOTTOM_CENTER);
+        buttoncetak.setGraphic(logo2);
         buttoncetak.setOnAction(e -> {
             struk();
         });
 
-
         //vbox
         VBox layout = new VBox();
-        layout.setStyle("-fx-background-color: #5F9EA0;");
-        // layout.setAlignment(Pos.TOP_CENTER);
+        layout.setStyle("-fx-background-color: #CACDCB;");
+        layout.setAlignment(Pos.TOP_CENTER);
         // layout.setPadding(new Insets(2));
-        layout.getChildren().addAll(gridpaneatas,daftar1,daftar2,daftar3,daftar4, totalLabel,buttoncetak);
+        layout.getChildren().addAll(palingatas,gridpaneatas,daftar1,daftar2,daftar3,daftar4, total,buttoncetak);
+        // layout.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(layout, 400, 600);
 
@@ -308,7 +351,14 @@ public class App extends Application {
     }
 
         private Button createHargaButton(int harga, Label label) {
-            Button hargaButton = new Button("tambah");
+            InputStream inputlogotambah = getClass().getResourceAsStream("/image/tambah.png");
+            Image urltambah = new Image(inputlogotambah);
+            ImageView logotambah = new ImageView(urltambah);
+            logotambah.setFitHeight(25);
+            logotambah.setFitWidth(25);
+
+            Button hargaButton = new Button();
+            hargaButton.setGraphic(logotambah);
 
             hargaButton.setOnAction(e -> {
                 totalHarga += harga;
@@ -316,9 +366,6 @@ public class App extends Application {
                 String formattedTotalHarga = decimalFormat.format(totalHarga);
                 totalLabel.setText("Total: Rp." + formattedTotalHarga);
 
-                // // Show the label text on the receipt
-                // strukLabel.setText(label.getText());
-                // struk(label.getText());
             });
             return hargaButton;
         }
@@ -330,39 +377,45 @@ public class App extends Application {
         strukPane.setHgap(10);
         strukPane.setVgap(10);
         strukPane.setPadding(new Insets(20));
-    
+
         // Judul struk
         Label judulLabel = new Label("SEBERSIH SHOES & CARE");
         judulLabel.setFont(new Font("Arial", 15));
         judulLabel.setStyle("-fx-font-weight: bold; ");
         strukPane.add(judulLabel, 0, 0, 2, 1);
-    
+
+        // Alamat
+        Label alamatLabel = new Label("BTP BLOK AB. 90\nMakassar\n0896 0212 8837");
+        alamatLabel.setFont(new Font("Arial", 15));
+        strukPane.add(alamatLabel, 0,1,2,1);
+
         // Tanggal
         Label tanggalLabel = new Label("Tanggal: " + LocalDate.now().toString());
-        strukPane.add(tanggalLabel, 0, 1, 2, 1);
-    
+        strukPane.add(tanggalLabel, 0, 2, 2, 1);
+
         // Daftar pembelian
         Label daftarLabel = new Label("Daftar Pembelian:");
         daftarLabel.setFont(new Font("Arial", 15));
         daftarLabel.setStyle("-fx-font-weight: bold; ");
-        strukPane.add(daftarLabel, 0, 2, 2, 1);
+        strukPane.add(daftarLabel, 0, 3, 2, 1);
 
         //list pembelian
         
-    
         // Total pembelian
         Label totalLabel = new Label("Total: Rp." + totalHarga);
         totalLabel.setFont(new Font("Arial", 15));
         totalLabel.setStyle("-fx-font-weight: bold; ");
-        strukPane.add(totalLabel, 0, 3, 2, 1);
+        strukPane.add(totalLabel, 0, 4, 2, 1);
     
         // Button OK
-        Button okButton = new Button("OK");
+        Button okButton = new Button("OK CETAK");
+        okButton.setStyle("-fx-cursor: hand;");
         okButton.setOnAction(e -> {
             saveStrukToPDF();
             menuUtama();
+            // openPDF();
         });
-        strukPane.add(okButton, 0, 4, 2, 1);
+        strukPane.add(okButton, 0, 5, 2, 1);
         GridPane.setHalignment(okButton, HPos.CENTER);
     
         // Membuat tampilan struk sebagai scene baru
@@ -374,6 +427,7 @@ public class App extends Application {
     }
 
     private void saveStrukToPDF() {
+        //membuat struk dengan pdf
         PDDocument document = new PDDocument();
         PDPage page = new PDPage();
         document.addPage(page);
@@ -391,19 +445,36 @@ public class App extends Application {
             contentStream.newLineAtOffset(50, 670);
             contentStream.showText("Tanggal: " + LocalDate.now().toString());
             contentStream.endText();
+
+            contentStream.setFont(PDType1Font.HELVETICA, 15);
+            contentStream.beginText();
+            contentStream.newLineAtOffset(50, 640);
+            contentStream.showText("BTP BLOK AB. 90");
+            contentStream.endText();
+
+            contentStream.setFont(PDType1Font.HELVETICA, 15);
+            contentStream.beginText();
+            contentStream.newLineAtOffset(50, 620);
+            contentStream.showText("MAKASSAR");
+            contentStream.endText();
+
+            contentStream.setFont(PDType1Font.HELVETICA, 15);
+            contentStream.beginText();
+            contentStream.newLineAtOffset(50, 600);
+            contentStream.showText("0896 0212 8837");
+            contentStream.endText();
     
             contentStream.setFont(PDType1Font.HELVETICA_BOLD, 15);
             contentStream.beginText();
-            contentStream.newLineAtOffset(50, 630);
+            contentStream.newLineAtOffset(50, 570);
             contentStream.showText("Daftar Pembelian:");
             contentStream.endText();
     
             // Menambahkan daftar pembelian dan total ke PDF
-            // ...
     
             contentStream.setFont(PDType1Font.HELVETICA_BOLD, 15);
             contentStream.beginText();
-            contentStream.newLineAtOffset(50, 590);
+            contentStream.newLineAtOffset(50, 540);
             contentStream.showText("Total: Rp." + totalHarga);
             contentStream.endText();
     
