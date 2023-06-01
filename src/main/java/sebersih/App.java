@@ -170,7 +170,7 @@ public class App extends Application {
         daftar1.setAlignment(Pos.TOP_LEFT);
         daftar1.setHgap(150);
         daftar1.setVgap(15);
-        daftar1.setPadding(new Insets(20, 20, 20, 39));
+        daftar1.setPadding(new Insets(30, 20, 20, 39));
 
         Label namaDaftar1 = new Label("Clean Wash Easy \n Rp. 30.000");
         namaDaftar1.setFont(new Font("ROCKWELL", 15));
@@ -354,6 +354,7 @@ public class App extends Application {
         okButton.setOnAction(e -> {
             saveStrukToPDF();
             menuUtama();
+            // openPDF();
         });
         strukPane.add(okButton, 0, 5, 2, 1);
         GridPane.setHalignment(okButton, HPos.CENTER);
@@ -367,6 +368,7 @@ public class App extends Application {
     }
 
     private void saveStrukToPDF() {
+        //membuat struk dengan pdf
         PDDocument document = new PDDocument();
         PDPage page = new PDPage();
         document.addPage(page);
