@@ -19,9 +19,12 @@ import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -74,29 +77,68 @@ public class App extends Application {
         InputStream inputlogo = getClass().getResourceAsStream("/image/keranjang.png");
         Image url1 = new Image(inputlogo);
         ImageView logo1 = new ImageView(url1);
-        logo1.setFitHeight(100);
-        logo1.setFitWidth(100);
+        logo1.setFitHeight(200);
+        logo1.setFitWidth(200);
 
-        Button keranjang = new Button("MASUK", logo1);
-        keranjang.setFont(new Font("Forte", 15));
-        keranjang.setStyle("-fx-background-color: #BB9F31; -fx-background-radius: 480; -fx-pref-width: 180px; -fx-pref-height: 180px; -fx-cursor: hand;");
-        keranjang.setAlignment(Pos.CENTER);
-        keranjang.setOnMouseEntered(e -> {
-            keranjang.setStyle("-fx-background-color: #000000;-fx-background-radius: 180; -fx-pref-width: 180px; -fx-pref-height: 180px; -fx-cursor: hand;");
+        // Button keranjang = new Button("MASUK", logo1);
+        // keranjang.setFont(new Font("Forte", 15));
+        // keranjang.setStyle("-fx-background-color: #BB9F31; -fx-background-radius: 480; -fx-pref-width: 180px; -fx-pref-height: 180px; -fx-cursor: hand;");
+        // keranjang.setAlignment(Pos.CENTER);
+        // keranjang.setOnMouseEntered(e -> {
+        //     keranjang.setStyle("-fx-background-color: #000000;-fx-background-radius: 180; -fx-pref-width: 180px; -fx-pref-height: 180px; -fx-cursor: hand;");
+        // });
+        // keranjang.setOnMouseExited(e -> {
+        //     keranjang.setStyle("-fx-background-color: #BB9F31; -fx-background-radius: 180; -fx-pref-width: 180px; -fx-pref-height: 180px; -fx-cursor: hand;");
+        // });
+        // keranjang.setOnAction(e -> {
+        //     // sceneMenu();
+        // });
+
+
+                // TextFields for username and password
+        Label usernameLabel = new Label("Username:");
+        TextField usernameField = new TextField();
+        usernameField.setPromptText("Username");
+        usernameField.setPrefWidth(150);
+
+        Label passwordLabel = new Label("Password:");
+        PasswordField passwordField = new PasswordField();
+        passwordField.setPromptText("Password");
+        passwordField.setPrefWidth(150);
+
+        // Tombol login
+        Button login = new Button("LOGIN");
+        login.setFont(new Font("Forte", 15));
+        login.setStyle("-fx-background-color: #BB9F31; -fx-background-radius: 480; -fx-pref-width: 120px; -fx-pref-height: 50px; -fx-cursor: hand;");
+        login.setAlignment(Pos.CENTER);
+        login.setOnMouseEntered(e -> {
+        login.setStyle("-fx-background-color: #000000;-fx-background-radius: 180; -fx-pref-width: 120px; -fx-pref-height: 50px; -fx-cursor: hand;");
         });
-        keranjang.setOnMouseExited(e -> {
-            keranjang.setStyle("-fx-background-color: #BB9F31; -fx-background-radius: 180; -fx-pref-width: 180px; -fx-pref-height: 180px; -fx-cursor: hand;");
+        login.setOnMouseExited(e -> {
+        login.setStyle("-fx-background-color: #BB9F31; -fx-background-radius: 180; -fx-pref-width: 120px; -fx-pref-height: 50px; -fx-cursor: hand;");
         });
-        keranjang.setOnAction(e -> {
+        login.setOnAction(e -> {
             sceneMenu();
         });
 
-        // membuat ketentuan tampilan
+        HBox usernameLayout = new HBox();
+        usernameLayout.getChildren().addAll(usernameLabel,usernameField);
+        usernameLayout.setSpacing(10);
+        usernameLayout.setAlignment(Pos.CENTER);
+
+        HBox passwordLayout = new HBox();
+        passwordLayout.getChildren().addAll(passwordLabel, passwordField);
+        passwordLayout.setSpacing(10);
+        passwordLayout.setAlignment(Pos.CENTER);
+
+    // membuat ketentuan tampilan
         VBox layout = new VBox();
         layout.setStyle("-fx-background-color: #5F9EA0; ");
         layout.setAlignment(Pos.TOP_CENTER);
         layout.setSpacing(20);
-        layout.getChildren().addAll(labelkasir, logo, keranjang, labelsebersih);
+        layout.getChildren().addAll(labelkasir, logo, logo1, labelsebersih, usernameLayout, passwordLayout, login);
+
+    
 
         Scene scene = new Scene(layout, 400, 660);
         primaryStage.setScene(scene);
@@ -142,7 +184,7 @@ public class App extends Application {
         clear.setStyle("-fx-background-radius: 20; -fx-cursor: hand;");
         clear.setOnAction(e -> {
             totalHarga = 0;
-            // sceneMenu();
+            sceneMenu();
         });
         gridpaneatas.add(clear, 1, 0);
         GridPane.setValignment(clear, VPos.CENTER);
@@ -160,6 +202,8 @@ public class App extends Application {
         namaDaftar1.setAlignment(Pos.TOP_LEFT);
         daftar1.add(namaDaftar1, 0, 0);
         GridPane.setHalignment(namaDaftar1, HPos.CENTER);
+
+        //
 
         Button hargaButton1 = createHargaButton(30000, namaDaftar1);
         hargaButton1.setAlignment(Pos.TOP_RIGHT);
