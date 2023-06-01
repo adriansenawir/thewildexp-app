@@ -1,8 +1,15 @@
 package sebersih;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import javafx.application.Application;
 import javafx.geometry.HPos;
@@ -18,11 +25,15 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 
 public class App extends Application {
     private Stage primaryStage;
     private int totalHarga = 0;
     private Label totalLabel;
+    // private String namaDaftar11;
+    String namaDaftar11;
 
     public static void main(String[] args) {
         launch(args);
@@ -92,7 +103,7 @@ public class App extends Application {
         primaryStage.show();
     }
 
-    private void sceneMenu() {
+    public void sceneMenu() {
         // bentuk yang bersampingan
         GridPane gridpaneatas = new GridPane();
         gridpaneatas.setAlignment(Pos.TOP_CENTER);
@@ -131,7 +142,7 @@ public class App extends Application {
         clear.setStyle("-fx-background-radius: 20; -fx-cursor: hand;");
         clear.setOnAction(e -> {
             totalHarga = 0;
-            sceneMenu();
+            // sceneMenu();
         });
         gridpaneatas.add(clear, 1, 0);
         GridPane.setValignment(clear, VPos.CENTER);
@@ -150,7 +161,7 @@ public class App extends Application {
         daftar1.add(namaDaftar1, 0, 0);
         GridPane.setHalignment(namaDaftar1, HPos.CENTER);
 
-        Button hargaButton1 = createHargaButton(30000);
+        Button hargaButton1 = createHargaButton(30000, namaDaftar1);
         hargaButton1.setAlignment(Pos.TOP_RIGHT);
         daftar1.add(hargaButton1, 1, 0);
         GridPane.setValignment(hargaButton1, VPos.CENTER);
@@ -169,7 +180,7 @@ public class App extends Application {
         daftar2.add(namaDaftar2, 0, 0);
         GridPane.setHalignment(namaDaftar2, HPos.CENTER);
 
-        Button hargaButton2 = createHargaButton(35000);
+        Button hargaButton2 = createHargaButton(35000, namaDaftar2);
         hargaButton2.setAlignment(Pos.TOP_RIGHT);
         daftar2.add(hargaButton2, 1, 0);
         GridPane.setValignment(hargaButton2, VPos.CENTER);
@@ -188,7 +199,7 @@ public class App extends Application {
         daftar3.add(namaDaftar3, 0, 0);
         GridPane.setHalignment(namaDaftar3, HPos.CENTER);
 
-        Button hargaButton3 = createHargaButton(25000);
+        Button hargaButton3 = createHargaButton(25000, namaDaftar3);
         hargaButton3.setAlignment(Pos.TOP_RIGHT);
         daftar3.add(hargaButton3, 1, 0);
         GridPane.setValignment(hargaButton3, VPos.CENTER);
@@ -207,7 +218,7 @@ public class App extends Application {
         daftar4.add(namaDaftar4, 0, 0);
         GridPane.setHalignment(namaDaftar4, HPos.CENTER);
 
-        Button hargaButton4 = createHargaButton(20000);
+        Button hargaButton4 = createHargaButton(20000, namaDaftar4);
         hargaButton4.setAlignment(Pos.TOP_RIGHT);
         daftar4.add(hargaButton4, 1, 0);
         GridPane.setValignment(hargaButton4, VPos.CENTER);
@@ -216,6 +227,12 @@ public class App extends Application {
         totalLabel = new Label("Total: Rp." + totalHarga);
         totalLabel.setFont(new Font("ARIAL", 20));
         totalLabel.setAlignment(Pos.BOTTOM_CENTER);
+
+        // Label to display on the receipt
+        Label strukLabel = new Label();
+        strukLabel.setFont(new Font("Arial", 15));
+        strukLabel.setStyle("-fx-font-weight: bold; ");
+        // strukPane.add(strukLabel, 0, 3, 2, 1);
 
         //button scene ke menu berikutnya
         InputStream inputlogosave = getClass().getResourceAsStream("/image/save.png");
@@ -226,7 +243,10 @@ public class App extends Application {
 
         Button buttoncetak = new Button("Cetak");
         buttoncetak.setAlignment(Pos.BOTTOM_RIGHT);
-        GridPane.setValignment(buttoncetak, VPos.BOTTOM);
+        // GridPane.setValignment(buttoncetak, VPos.BOTTOM);
+        buttoncetak.setOnAction(e -> {
+            struk();
+        });
 
 
         //vbox
@@ -243,19 +263,114 @@ public class App extends Application {
         primaryStage.show();
     }
 
-        private Button createHargaButton(int harga) {
+        private Button createHargaButton(int harga, Label label) {
             Button hargaButton = new Button("tambah");
 
             hargaButton.setOnAction(e -> {
                 totalHarga += harga;
-                DecimalFormat decimalFormat = new DecimalFormat("#.##0");
+                DecimalFormat decimalFormat = new DecimalFormat("#,##0");
                 String formattedTotalHarga = decimalFormat.format(totalHarga);
                 totalLabel.setText("Total: Rp." + formattedTotalHarga);
+
+                // // Show the label text on the receipt
+                // strukLabel.setText(label.getText());
+                // struk(label.getText());
             });
             return hargaButton;
         }
 
     private void struk(){
+        // Membuat tampilan struk seperti kertas
+        GridPane strukPane = new GridPane();
+        strukPane.setAlignment(Pos.TOP_CENTER);
+        strukPane.setHgap(10);
+        strukPane.setVgap(10);
+        strukPane.setPadding(new Insets(20));
+    
+        // Judul struk
+        Label judulLabel = new Label("SEBERSIH SHOES & CARE");
+        judulLabel.setFont(new Font("Arial", 15));
+        judulLabel.setStyle("-fx-font-weight: bold; ");
+        strukPane.add(judulLabel, 0, 0, 2, 1);
+    
+        // Tanggal
+        Label tanggalLabel = new Label("Tanggal: " + LocalDate.now().toString());
+        strukPane.add(tanggalLabel, 0, 1, 2, 1);
+    
+        // Daftar pembelian
+        Label daftarLabel = new Label("Daftar Pembelian:");
+        daftarLabel.setFont(new Font("Arial", 15));
+        daftarLabel.setStyle("-fx-font-weight: bold; ");
+        strukPane.add(daftarLabel, 0, 2, 2, 1);
 
+        //list pembelian
+        
+    
+        // Total pembelian
+        Label totalLabel = new Label("Total: Rp." + totalHarga);
+        totalLabel.setFont(new Font("Arial", 15));
+        totalLabel.setStyle("-fx-font-weight: bold; ");
+        strukPane.add(totalLabel, 0, 3, 2, 1);
+    
+        // Button OK
+        Button okButton = new Button("OK");
+        okButton.setOnAction(e -> {
+            saveStrukToPDF();
+            menuUtama();
+        });
+        strukPane.add(okButton, 0, 4, 2, 1);
+        GridPane.setHalignment(okButton, HPos.CENTER);
+    
+        // Membuat tampilan struk sebagai scene baru
+        Scene strukScene = new Scene(strukPane, 300, 400);
+        Stage strukStage = new Stage();
+        strukStage.setTitle("Struk Pembelian");
+        strukStage.setScene(strukScene);
+        strukStage.show();
     }
+
+    private void saveStrukToPDF() {
+        PDDocument document = new PDDocument();
+        PDPage page = new PDPage();
+        document.addPage(page);
+    
+        try {
+            PDPageContentStream contentStream = new PDPageContentStream(document, page);
+            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 20);
+            contentStream.beginText();
+            contentStream.newLineAtOffset(50, 700);
+            contentStream.showText("SEBERSIH SHOES & CARE");
+            contentStream.endText();
+    
+            contentStream.setFont(PDType1Font.HELVETICA, 12);
+            contentStream.beginText();
+            contentStream.newLineAtOffset(50, 670);
+            contentStream.showText("Tanggal: " + LocalDate.now().toString());
+            contentStream.endText();
+    
+            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 15);
+            contentStream.beginText();
+            contentStream.newLineAtOffset(50, 630);
+            contentStream.showText("Daftar Pembelian:");
+            contentStream.endText();
+    
+            // Menambahkan daftar pembelian dan total ke PDF
+            // ...
+    
+            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 15);
+            contentStream.beginText();
+            contentStream.newLineAtOffset(50, 590);
+            contentStream.showText("Total: Rp." + totalHarga);
+            contentStream.endText();
+    
+            contentStream.close();
+    
+            // Menyimpan file PDF
+            document.save("struk.pdf");
+            document.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
 }
