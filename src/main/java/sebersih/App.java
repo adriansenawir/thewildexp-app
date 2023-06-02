@@ -448,10 +448,18 @@ public class App extends Application {
     private void struk(){
         // Membuat tampilan struk seperti kertas
         GridPane strukPane = new GridPane();
-        strukPane.setAlignment(Pos.TOP_CENTER);
+        Image bgImage = new Image("/image/logosebersih.png");
+        ImageView bgImageView = new ImageView(bgImage);
+        bgImageView.setFitWidth(100);
+        bgImageView.setFitHeight(100);
+        bgImageView.setPreserveRatio(true);
+        strukPane.getChildren().add(bgImageView);
+        
+        strukPane.setAlignment(Pos.CENTER);
         strukPane.setHgap(10);
         strukPane.setVgap(10);
         strukPane.setPadding(new Insets(20));
+
 
         // Judul struk
         Label judulLabel = new Label("SEBERSIH SHOES & CARE");
@@ -493,7 +501,7 @@ public class App extends Application {
         strukPane.add(okButton, 0, 5, 2, 1);
         GridPane.setHalignment(okButton, HPos.CENTER);
     
-        // Membuat tampilan struk sebagai scene baru
+        // // Membuat tampilan struk sebagai scene baru
         Scene strukScene = new Scene(strukPane, 300, 400);
         Stage strukStage = new Stage();
         strukStage.setTitle("Struk Pembelian");
