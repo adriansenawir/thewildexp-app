@@ -467,7 +467,7 @@ public class App extends Application {
         StackPane stackPane = new StackPane();
         GridPane strukPane = new GridPane();
 
-        Image bgImage = new Image("/image/logosebersih.png");
+        Image bgImage = new Image("/image/logosebersihB&W.png");
         ImageView bgImageView = new ImageView(bgImage);
         bgImageView.setFitWidth(100);
         bgImageView.setFitHeight(100);
