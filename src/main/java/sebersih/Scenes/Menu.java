@@ -22,9 +22,9 @@ public class Menu {
     private Label totalLabel;
     private Stage primaryStage;
 
-    public Menu(Stage primaryStage, int totalHarga){
+    public Menu(Stage primaryStage){
         this.primaryStage = primaryStage;
-        this.totalHarga = totalHarga;
+        // this.totalHarga = totalHarga;
     }
 
     public void show(){
@@ -70,6 +70,12 @@ public class Menu {
             Login login = new Login(primaryStage);
             login.show();
         });
+        back.setOnMouseEntered(e ->{
+            back.setStyle("-fx-background-radius: 15; -fx-background-color: #A1ABB6; -fx-cursor: hand;");
+        });
+        back.setOnMouseExited(e -> {
+            back.setStyle("-fx-background-radius: 15; -fx-text-fill: white; -fx-cursor: hand; -fx-background-color: #105A86;");
+        });
         gridpaneatas.add(back, 0, 0);
         GridPane.setHalignment(back, HPos.CENTER);
 
@@ -85,8 +91,14 @@ public class Menu {
         clear.setStyle("-fx-background-radius: 15; -fx-text-fill: white; -fx-cursor: hand; -fx-background-color: #105A86; ");
         clear.setOnAction(e -> {
             totalHarga = 0;
-            Menu menu =new Menu(primaryStage, totalHarga);
+            Menu menu =new Menu(primaryStage);
             menu.show();
+        });
+        clear.setOnMouseEntered(e ->{
+            clear.setStyle("-fx-background-radius: 15; -fx-background-color: #A1ABB6; -fx-cursor: hand;");
+        });
+        clear.setOnMouseExited(e -> {
+            clear.setStyle("-fx-background-radius: 15; -fx-text-fill: white; -fx-cursor: hand; -fx-background-color: #105A86;");
         });
         gridpaneatas.add(clear, 1, 0);
         GridPane.setValignment(clear, VPos.CENTER);
@@ -100,15 +112,20 @@ public class Menu {
 
         Label namaDaftar1 = new Label("Clean Wash Easy \n Rp. 30.000");
         namaDaftar1.setFont(new Font("ROCKWELL", 15));
-        namaDaftar1.setStyle("-fx-font-weight: bold; -fx-cursor: hand;");
+        namaDaftar1.setStyle("-fx-font-weight: bold;");
         namaDaftar1.setAlignment(Pos.TOP_LEFT);
         daftar1.add(namaDaftar1, 0, 0);
         GridPane.setHalignment(namaDaftar1, HPos.CENTER);
 
-        //
-
         Button hargaButton1 = createHargaButton(30000, namaDaftar1);
         hargaButton1.setAlignment(Pos.TOP_RIGHT);
+        hargaButton1.setStyle("-fx-background-color: #FFFFFF;");
+        hargaButton1.setOnMouseEntered(e ->{
+            hargaButton1.setStyle("-fx-background-color: #A1ABB6;-fx-cursor: hand;");
+        });
+        hargaButton1.setOnMouseExited(e -> {
+            hargaButton1.setStyle("-fx-background-color: #FFFFFF;");
+        });
         daftar1.add(hargaButton1, 1, 0);
         GridPane.setValignment(hargaButton1, VPos.CENTER);
 
@@ -121,13 +138,20 @@ public class Menu {
 
         Label namaDaftar2 = new Label("Clean Wash Hard \n Rp. 35.000");
         namaDaftar2.setFont(new Font("ROCKWELL", 15));
-        namaDaftar2.setStyle("-fx-font-weight: bold; -fx-cursor: hand; ");
+        namaDaftar2.setStyle("-fx-font-weight: bold;");
         namaDaftar2.setAlignment(Pos.TOP_LEFT);
         daftar2.add(namaDaftar2, 0, 0);
         GridPane.setHalignment(namaDaftar2, HPos.CENTER);
 
         Button hargaButton2 = createHargaButton(35000, namaDaftar2);
         hargaButton2.setAlignment(Pos.TOP_RIGHT);
+        hargaButton2.setStyle("-fx-background-color: #FFFFFF;");
+        hargaButton2.setOnMouseEntered(e ->{
+            hargaButton2.setStyle("-fx-background-color: #A1ABB6; -fx-cursor: hand;");
+        });
+        hargaButton2.setOnMouseExited(e -> {
+            hargaButton2.setStyle("-fx-background-color: #FFFFFF;");
+        });
         daftar2.add(hargaButton2, 1, 0);
         GridPane.setValignment(hargaButton2, VPos.CENTER);
 
@@ -140,13 +164,20 @@ public class Menu {
 
         Label namaDaftar3 = new Label("Flash Wash \n Rp. 25.000");
         namaDaftar3.setFont(new Font("ROCKWELL", 15));
-        namaDaftar3.setStyle("-fx-font-weight: bold; -fx-cursor: hand;");
+        namaDaftar3.setStyle("-fx-font-weight: bold;");
         namaDaftar3.setAlignment(Pos.TOP_LEFT);
         daftar3.add(namaDaftar3, 0, 0);
         GridPane.setHalignment(namaDaftar3, HPos.CENTER);
 
         Button hargaButton3 = createHargaButton(25000, namaDaftar3);
         hargaButton3.setAlignment(Pos.TOP_RIGHT);
+        hargaButton3.setStyle("-fx-background-color: #FFFFFF;");
+        hargaButton3.setOnMouseEntered(e->{
+            hargaButton3.setStyle("-fx-background-color: #A1ABB6; -fx-cursor: hand; ");
+        });
+        hargaButton3.setOnMouseExited(e -> {
+            hargaButton3.setStyle("-fx-background-color: #FFFFFF;");
+        });
         daftar3.add(hargaButton3, 1, 0);
         GridPane.setValignment(hargaButton3, VPos.CENTER);
 
@@ -159,13 +190,20 @@ public class Menu {
 
         Label namaDaftar4 = new Label("Kids Shoes \n Rp. 20.000");
         namaDaftar4.setFont(new Font("ROCKWELL", 15));
-        namaDaftar4.setStyle("-fx-font-weight: bold; -fx-cursor: hand;");
+        namaDaftar4.setStyle("-fx-font-weight: bold;");
         namaDaftar4.setAlignment(Pos.TOP_LEFT);
         daftar4.add(namaDaftar4, 0, 0);
         GridPane.setHalignment(namaDaftar4, HPos.CENTER);
 
         Button hargaButton4 = createHargaButton(20000, namaDaftar4);
         hargaButton4.setAlignment(Pos.TOP_RIGHT);
+        hargaButton4.setStyle("-fx-background-color: #FFFFFF;");
+        hargaButton4.setOnMouseEntered(e ->{
+            hargaButton4.setStyle("-fx-background-color: #A1ABB6;-fx-cursor: hand;");
+        });
+        hargaButton4.setOnMouseExited(e -> {
+            hargaButton4.setStyle("-fx-background-color: #FFFFFF;");
+        });
         daftar4.add(hargaButton4, 1, 0);
         GridPane.setValignment(hargaButton4, VPos.CENTER);
 
@@ -203,6 +241,12 @@ public class Menu {
         buttoncetak.setOnAction(e -> {
             TamStruk tamStruk = new TamStruk(primaryStage, totalHarga);
             tamStruk.show();
+        });
+        buttoncetak.setOnMouseEntered(e ->{
+            buttoncetak.setStyle("-fx-background-color: #A1ABB6; -fx-cursor: hand;");
+        });
+        buttoncetak.setOnMouseExited(e -> {
+            buttoncetak.setStyle("-fx-background-color: #394867; -fx-cursor: hand;");
         });
 
         //vbox

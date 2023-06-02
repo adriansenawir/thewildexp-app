@@ -21,8 +21,6 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
-
-
 public class TamStruk {
     private int totalHarga;
     private Stage primaryStage;
@@ -111,11 +109,14 @@ public class TamStruk {
 
         try {
             PDPageContentStream contentStream = new PDPageContentStream(document, page);
+
+            
             contentStream.setFont(PDType1Font.HELVETICA_BOLD, 20);
             contentStream.beginText();
             contentStream.newLineAtOffset(50, 700);
             contentStream.showText("SEBERSIH SHOES & CARE");
             contentStream.endText();
+            
 
             contentStream.setFont(PDType1Font.HELVETICA, 15);
             contentStream.beginText();
@@ -160,6 +161,7 @@ public class TamStruk {
             // Menyimpan file PDF
             document.save("struk.pdf");
             document.close();
+            System.out.println("Kamu berhasil mencetaknya");
         } catch (IOException e) {
             e.printStackTrace();
         }
