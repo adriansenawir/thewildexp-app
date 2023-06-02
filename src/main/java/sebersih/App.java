@@ -460,45 +460,44 @@ public class App extends Application {
         stackPane.getChildren().add(bgImageView);
         StackPane.setAlignment(bgImageView, Pos.CENTER);
 
-        strukPane.getChildren().add(stackPane);
-        
-        GridPane.setMargin(stackPane, new Insets(0,0,0,0));
-        
+        strukPane.add(stackPane, 0, 0);
+        GridPane.setMargin(stackPane, new Insets(0, 0, 20, 0));
+
         strukPane.setAlignment(Pos.TOP_CENTER);
         strukPane.setHgap(10);
         strukPane.setVgap(10);
         strukPane.setPadding(new Insets(20));
 
-
         // Judul struk
         Label judulLabel = new Label("SEBERSIH SHOES & CARE");
         judulLabel.setFont(new Font("Arial", 15));
         judulLabel.setStyle("-fx-font-weight: bold; ");
-        strukPane.add(judulLabel, 0, 2, 2, 1);
+        strukPane.add(judulLabel, 0, 1, 2, 1);
 
         // Alamat
         Label alamatLabel = new Label("BTP BLOK AB. 90\nMakassar\n0896 0212 8837");
         alamatLabel.setFont(new Font("Arial", 15));
-        strukPane.add(alamatLabel, 0,1,2,1);
+        strukPane.add(alamatLabel, 0, 2, 2, 1);
 
         // Tanggal
         Label tanggalLabel = new Label("Tanggal: " + LocalDate.now().toString());
-        strukPane.add(tanggalLabel, 0, 2, 2, 1);
+        tanggalLabel.setFont(new Font("Arial", 15));
+        strukPane.add(tanggalLabel, 0, 3, 2, 1);
 
         // Daftar pembelian
         Label daftarLabel = new Label("Daftar Pembelian:");
         daftarLabel.setFont(new Font("Arial", 15));
         daftarLabel.setStyle("-fx-font-weight: bold; ");
-        strukPane.add(daftarLabel, 0, 3, 2, 1);
+        strukPane.add(daftarLabel, 0, 4, 2, 1);
 
-        //list pembelian
-        
+        // List pembelian
+
         // Total pembelian
         Label totalLabel = new Label("Total: Rp." + totalHarga);
         totalLabel.setFont(new Font("Arial", 15));
         totalLabel.setStyle("-fx-font-weight: bold; ");
-        strukPane.add(totalLabel, 0, 4, 2, 1);
-    
+        strukPane.add(totalLabel, 0, 5, 2, 1);
+
         // Button OK
         Button okButton = new Button("OK CETAK");
         okButton.setStyle("-fx-cursor: hand;");
@@ -507,10 +506,10 @@ public class App extends Application {
             menuUtama();
             // openPDF();
         });
-        strukPane.add(okButton, 0, 5, 2, 1);
+        strukPane.add(okButton, 0, 6, 2, 1);
         GridPane.setHalignment(okButton, HPos.CENTER);
-    
-        // // Membuat tampilan struk sebagai scene baru
+
+        // Membuat tampilan struk sebagai scene baru
         Scene strukScene = new Scene(strukPane, 300, 400);
         Stage strukStage = new Stage();
         strukStage.setTitle("Struk Pembelian");
@@ -519,11 +518,11 @@ public class App extends Application {
     }
 
     private void saveStrukToPDF() {
-        //membuat struk dengan pdf
+        // Membuat struk dengan PDF
         PDDocument document = new PDDocument();
         PDPage page = new PDPage();
         document.addPage(page);
-    
+
         try {
             PDPageContentStream contentStream = new PDPageContentStream(document, page);
             contentStream.setFont(PDType1Font.HELVETICA_BOLD, 20);
@@ -531,7 +530,7 @@ public class App extends Application {
             contentStream.newLineAtOffset(50, 700);
             contentStream.showText("SEBERSIH SHOES & CARE");
             contentStream.endText();
-    
+
             contentStream.setFont(PDType1Font.HELVETICA, 12);
             contentStream.beginText();
             contentStream.newLineAtOffset(50, 670);
@@ -555,23 +554,23 @@ public class App extends Application {
             contentStream.newLineAtOffset(50, 600);
             contentStream.showText("0896 0212 8837");
             contentStream.endText();
-    
+
             contentStream.setFont(PDType1Font.HELVETICA_BOLD, 15);
             contentStream.beginText();
             contentStream.newLineAtOffset(50, 570);
             contentStream.showText("Daftar Pembelian:");
             contentStream.endText();
-    
+
             // Menambahkan daftar pembelian dan total ke PDF
-    
+
             contentStream.setFont(PDType1Font.HELVETICA_BOLD, 15);
             contentStream.beginText();
             contentStream.newLineAtOffset(50, 540);
             contentStream.showText("Total: Rp." + totalHarga);
             contentStream.endText();
-    
+
             contentStream.close();
-    
+
             // Menyimpan file PDF
             document.save("struk.pdf");
             document.close();
@@ -579,5 +578,5 @@ public class App extends Application {
             e.printStackTrace();
         }
     }
-    
+
 }
