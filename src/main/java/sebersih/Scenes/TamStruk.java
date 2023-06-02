@@ -84,7 +84,7 @@ public class TamStruk {
 
         // Button OK
         Button okButton = new Button("OK CETAK");
-        okButton.setStyle("-fx-cursor: hand;");
+        okButton.setStyle("-fx-cursor: hand;-fx-background-color: #105A86;-fx-text-fill: white;");
         okButton.setOnAction(e -> {
             pdfkan();
         });
