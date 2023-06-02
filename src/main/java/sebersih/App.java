@@ -18,6 +18,7 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -183,31 +184,47 @@ public class App extends Application {
         
         // VBox daftarLayout = new VBox();
         
-        // daftar.setOnAction(e -> {
+            daftar.setOnAction(e -> {
+            VBox daftarLayout = new VBox(); // create a new layout container
 
-        //     Label label = new Label("Silakan isi formulir pendaftaran");
-        //     label.setFont(new Font("Retro Warmth", 20));
-        //     label.setAlignment(Pos.CENTER);
-        //     daftarLayout.getChildren().add(label);
-    
-        //     TextField namaField = new TextField();
-        //     namaField.setPromptText("Nama Lengkap");
-        //     daftarLayout.getChildren().add(namaField);
-    
-        //     TextField emailField = new TextField();
-        //     emailField.setPromptText("Email");
-        //     daftarLayout.getChildren().add(emailField);
-    
-        //     Button submitButton = new Button("Submit");
-        //     submitButton.setOnAction(event -> {
-        //         // proses input dan submit data ke server
-        //         // ...
-        //         // kembali ke halaman sebelumnya setelah sukses submit
-        //         Stage stage = (Stage) submitButton.getScene().getWindow();
-        //         stage.close();
-        //     });
-        //     daftarLayout.getChildren().add(submitButton);
-        // });
+            Label label = new Label("Silakan isi formulir pendaftaran");
+            label.setFont(new Font("Retro Warmth", 20));
+            label.setAlignment(Pos.CENTER);
+            daftarLayout.getChildren().add(label);
+
+            TextField namaField = new TextField();
+            namaField.setPromptText("Nama Lengkap");
+            daftarLayout.getChildren().add(namaField);
+
+            TextField emailField = new TextField();
+            emailField.setPromptText("Email");
+            daftarLayout.getChildren().add(emailField);
+
+            Button submitButton = new Button("Submit");
+            submitButton.setOnAction(event -> {
+                String nama = namaField.getText();
+                String email = emailField.getText();
+
+                if (!nama.isEmpty() && !email.isEmpty()) {
+                    // proses input dan submit data ke server
+
+                    // kembali ke halaman sebelumnya setelah sukses submit
+                    Stage stage = (Stage) submitButton.getScene().getWindow();
+                    stage.close();
+                } else {
+                    // handle error when fields are empty
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Mohon lengkapi semua kolom");
+
+                    alert.showAndWait();
+                }
+            });
+            daftarLayout.getChildren().add(submitButton);
+
+            Scene newScene = new Scene(daftarLayout, 400, 600); // use the layout container as the scene root
+        });
 
         // // Menambahkan tombol daftar
         
@@ -230,7 +247,6 @@ public class App extends Application {
         layout.setAlignment(Pos.TOP_CENTER);
         layout.setSpacing(20);
         layout.getChildren().addAll(labelkasir, logo, labelsebersih, usernameLayout, passwordLayout, login, daftar);
-
         Scene scene = new Scene(layout, 400, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
