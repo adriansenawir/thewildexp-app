@@ -17,6 +17,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -28,6 +29,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+
 
 
 public class App extends Application {
@@ -72,13 +74,13 @@ public class App extends Application {
         labelsebersih.setStyle("-fx-font-weight: bold; ");
         labelsebersih.setAlignment(Pos.TOP_CENTER);
 
-        // image & button keranjang
-        InputStream inputlogo = getClass().getResourceAsStream("/image/keranjang.png");
-        Image url1 = new Image(inputlogo);
-        ImageView logo1 = new ImageView(url1);
+        // // image & button keranjang
+        // InputStream inputlogo = getClass().getResourceAsStream("/image/keranjang.png");
+        // Image url1 = new Image(inputlogo);
+        // ImageView logo1 = new ImageView(url1);
 
-        logo1.setFitHeight(200);
-        logo1.setFitWidth(200);
+        // logo1.setFitHeight(100);
+        // logo1.setFitWidth(100);
 
         // Button keranjang = new Button("MASUK", logo1);
         // keranjang.setFont(new Font("Forte", 15));
@@ -91,11 +93,26 @@ public class App extends Application {
         //     keranjang.setStyle("-fx-background-color: #BB9F31; -fx-background-radius: 180; -fx-pref-width: 180px; -fx-pref-height: 180px; -fx-cursor: hand;");
         // });
         // keranjang.setOnAction(e -> {
-        //     // sceneMenu();
+        //     sceneMenu();
         // });
 
+        
+        // Button keranjang = new Button();
+        // // keranjang.setFont(new Font("Forte", 15));
+        // keranjang.setGraphic(logo1);
+        // keranjang.setStyle("-fx-background-color: #105A86; -fx-background-radius: 480; -fx-pref-width: 50px; -fx-pref-height: 50px; -fx-cursor: hand;");
+        // keranjang.setAlignment(Pos.CENTER);
+        // keranjang.setOnMouseEntered(e -> {
+        //     keranjang.setStyle("-fx-background-color: #000000;-fx-background-radius: 180; -fx-pref-width: 50px; -fx-pref-height: 50px; -fx-cursor: hand;");
+        // });
+        // keranjang.setOnMouseExited(e -> {
+        //     keranjang.setStyle("-fx-background-color: #105A86; -fx-background-radius: 180; -fx-pref-width: 50px; -fx-pref-height: 50px; -fx-cursor: hand;");
+        // });
+        // login.setOnAction(e -> {
+        //     sceneMenu();
+        // });
 
-                // TextFields for username and password
+        // TextFields for username and password
         Label usernameLabel = new Label("Username:");
         TextField usernameField = new TextField();
         usernameField.setPromptText("Username");
@@ -105,35 +122,7 @@ public class App extends Application {
         PasswordField passwordField = new PasswordField();
         passwordField.setPromptText("Password");
         passwordField.setPrefWidth(150);
-
-        // Tombol login
-        Button login = new Button("LOGIN");
-        login.setFont(new Font("Forte", 15));
-        login.setStyle("-fx-background-color: #BB9F31; -fx-background-radius: 480; -fx-pref-width: 120px; -fx-pref-height: 50px; -fx-cursor: hand;");
-        login.setAlignment(Pos.CENTER);
-        login.setOnMouseEntered(e -> {
-        login.setStyle("-fx-background-color: #000000;-fx-background-radius: 180; -fx-pref-width: 120px; -fx-pref-height: 50px; -fx-cursor: hand;");
-        });
-        login.setOnMouseExited(e -> {
-        login.setStyle("-fx-background-color: #BB9F31; -fx-background-radius: 180; -fx-pref-width: 120px; -fx-pref-height: 50px; -fx-cursor: hand;");
-        logo1.setFitHeight(50);
-        logo1.setFitWidth(50);
-
-        Button keranjang = new Button();
-        // keranjang.setFont(new Font("Forte", 15));
-        keranjang.setGraphic(logo1);
-        keranjang.setStyle("-fx-background-color: #105A86; -fx-background-radius: 480; -fx-pref-width: 50px; -fx-pref-height: 50px; -fx-cursor: hand;");
-        keranjang.setAlignment(Pos.CENTER);
-        keranjang.setOnMouseEntered(e -> {
-            keranjang.setStyle("-fx-background-color: #000000;-fx-background-radius: 180; -fx-pref-width: 50px; -fx-pref-height: 50px; -fx-cursor: hand;");
-        });
-        keranjang.setOnMouseExited(e -> {
-            keranjang.setStyle("-fx-background-color: #105A86; -fx-background-radius: 180; -fx-pref-width: 50px; -fx-pref-height: 50px; -fx-cursor: hand;");
-        });
-        login.setOnAction(e -> {
-            sceneMenu();
-        });
-
+        
         HBox usernameLayout = new HBox();
         usernameLayout.getChildren().addAll(usernameLabel,usernameField);
         usernameLayout.setSpacing(10);
@@ -144,22 +133,108 @@ public class App extends Application {
         passwordLayout.setSpacing(10);
         passwordLayout.setAlignment(Pos.CENTER);
 
+        // Tombol login
+        Button login = new Button("LOGIN");
+        login.setFont(new Font("Retro Warmth", 15));
+        login.setStyle("-fx-background-color: #1E90FF; -fx-background-radius: 480; -fx-pref-width: 120px; -fx-pref-height: 50px; -fx-cursor: hand;");
+        login.setAlignment(Pos.CENTER);
+        login.setOnMouseEntered(e -> {
+        login.setStyle("-fx-background-color: #1E90FF;-fx-background-radius: 180; -fx-pref-width: 120px; -fx-pref-height: 50px; -fx-cursor: hand;");
+        });
+        login.setOnMouseExited(e -> {
+        login.setStyle("-fx-background-color: #1E90FF; -fx-background-radius: 180; -fx-pref-width: 120px; -fx-pref-height: 50px; -fx-cursor: hand;");
+        });
+        // logo1.setFitHeight(50);
+        // logo1.setFitWidth(50);
+        login.setOnAction(e -> { String usernameInput = usernameField.getText() ; String passwordInput = passwordField.getText();
+            try {
+                int passwordInt = Integer.parseInt(passwordInput);
+                if (usernameInput.matches("[a-zA-Z]+") && passwordInt >= 0) {
+                    sceneMenu();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Login Failed");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Invalid username or password. Please try again.");
+                    alert.showAndWait();
+                }
+            } catch (NumberFormatException ex) {
+                // If the password is not an integer, show an error message
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Login Failed");
+                alert.setHeaderText(null);
+                alert.setContentText("Password must be an Integer. Please try again.");
+                alert.showAndWait();
+            }
+        });
+
+        // Tombol daftar
+        Button daftar = new Button("DAFTAR");
+        daftar.setFont(new Font("Retro Warmth", 15));
+        daftar.setStyle("-fx-background-color: #1E90FF; -fx-background-radius: 480; -fx-pref-width: 120px; -fx-pref-height: 50px; -fx-cursor: hand;");
+        daftar.setAlignment(Pos.CENTER);
+        daftar.setOnMouseEntered(e -> {
+            daftar.setStyle("-fx-background-color: #1E90FF;-fx-background-radius: 180; -fx-pref-width: 120px; -fx-pref-height: 50px; -fx-cursor: hand;");
+        });
+        daftar.setOnMouseExited(e -> {
+            daftar.setStyle("-fx-background-color: #1E90FF; -fx-background-radius: 180; -fx-pref-width: 120px; -fx-pref-height: 50px; -fx-cursor: hand;");
+        });
+        
+        // VBox daftarLayout = new VBox();
+        
+        // daftar.setOnAction(e -> {
+
+        //     Label label = new Label("Silakan isi formulir pendaftaran");
+        //     label.setFont(new Font("Retro Warmth", 20));
+        //     label.setAlignment(Pos.CENTER);
+        //     daftarLayout.getChildren().add(label);
+    
+        //     TextField namaField = new TextField();
+        //     namaField.setPromptText("Nama Lengkap");
+        //     daftarLayout.getChildren().add(namaField);
+    
+        //     TextField emailField = new TextField();
+        //     emailField.setPromptText("Email");
+        //     daftarLayout.getChildren().add(emailField);
+    
+        //     Button submitButton = new Button("Submit");
+        //     submitButton.setOnAction(event -> {
+        //         // proses input dan submit data ke server
+        //         // ...
+        //         // kembali ke halaman sebelumnya setelah sukses submit
+        //         Stage stage = (Stage) submitButton.getScene().getWindow();
+        //         stage.close();
+        //     });
+        //     daftarLayout.getChildren().add(submitButton);
+        // });
+
+        // // Menambahkan tombol daftar
+        
+        // daftarLayout.getChildren().addAll(daftar);
+        // daftarLayout.setAlignment(Pos.CENTER);
+
+        // // Membuat halaman daftar
+        // VBox daftarLayout = new VBox();
+        // daftarLayout.setSpacing(10);
+
+
+        // registrationScene.setRoot(daftarLayout)= new Scene(daftarLayout);
+        // Stage stage = (Stage) daftar.getScene().getWindow();
+        // stage.setScene(registrationScene);
+
+
     // membuat ketentuan tampilan
         VBox layout = new VBox();
         layout.setStyle("-fx-background-color: #CACDCB; ");
         layout.setAlignment(Pos.TOP_CENTER);
         layout.setSpacing(20);
-        layout.getChildren().addAll(labelkasir, logo, logo1, labelsebersih, usernameLayout, passwordLayout, login);
-
-    
+        layout.getChildren().addAll(labelkasir, logo, labelsebersih, usernameLayout, passwordLayout, login, daftar);
 
         Scene scene = new Scene(layout, 400, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-        ) ;
-}
-
+    
     public void sceneMenu() {
         // transaksi top
         GridPane palingatas = new GridPane();
