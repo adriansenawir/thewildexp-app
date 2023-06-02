@@ -26,6 +26,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -447,15 +448,23 @@ public class App extends Application {
 
     private void struk(){
         // Membuat tampilan struk seperti kertas
+        StackPane stackPane = new StackPane();
         GridPane strukPane = new GridPane();
+
         Image bgImage = new Image("/image/logosebersih.png");
         ImageView bgImageView = new ImageView(bgImage);
         bgImageView.setFitWidth(100);
         bgImageView.setFitHeight(100);
         bgImageView.setPreserveRatio(true);
-        strukPane.getChildren().add(bgImageView);
+
+        stackPane.getChildren().add(bgImageView);
+        StackPane.setAlignment(bgImageView, Pos.CENTER);
+
+        strukPane.getChildren().add(stackPane);
         
-        strukPane.setAlignment(Pos.CENTER);
+        GridPane.setMargin(stackPane, new Insets(0,0,0,0));
+        
+        strukPane.setAlignment(Pos.TOP_CENTER);
         strukPane.setHgap(10);
         strukPane.setVgap(10);
         strukPane.setPadding(new Insets(20));
@@ -465,7 +474,7 @@ public class App extends Application {
         Label judulLabel = new Label("SEBERSIH SHOES & CARE");
         judulLabel.setFont(new Font("Arial", 15));
         judulLabel.setStyle("-fx-font-weight: bold; ");
-        strukPane.add(judulLabel, 0, 0, 2, 1);
+        strukPane.add(judulLabel, 0, 2, 2, 1);
 
         // Alamat
         Label alamatLabel = new Label("BTP BLOK AB. 90\nMakassar\n0896 0212 8837");
