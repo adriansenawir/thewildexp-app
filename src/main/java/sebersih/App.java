@@ -133,17 +133,17 @@ public class App extends Application {
         passwordLayout.setSpacing(10);
         passwordLayout.setAlignment(Pos.CENTER);
 
-        // Tombol login
         Button login = new Button("LOGIN");
         login.setFont(new Font("Retro Warmth", 15));
-        login.setStyle("-fx-background-color: #1E90FF; -fx-background-radius: 480; -fx-pref-width: 120px; -fx-pref-height: 50px; -fx-cursor: hand;");
+        login.setStyle("-fx-background-color: #1E90FF; -fx-background-radius: 0; -fx-pref-width: 120px; -fx-pref-height: 30px; -fx-cursor: hand; -fx-border-color: #000000; -fx-border-width: 1px;");
         login.setAlignment(Pos.CENTER);
         login.setOnMouseEntered(e -> {
-        login.setStyle("-fx-background-color: #1E90FF;-fx-background-radius: 180; -fx-pref-width: 120px; -fx-pref-height: 50px; -fx-cursor: hand;");
+            login.setStyle("-fx-background-color: #1E90FF;-fx-background-radius: 0; -fx-pref-width: 120px; -fx-pref-height: 30px; -fx-cursor: hand; -fx-border-color: #000000; -fx-border-width: 1px;");
         });
         login.setOnMouseExited(e -> {
-        login.setStyle("-fx-background-color: #1E90FF; -fx-background-radius: 180; -fx-pref-width: 120px; -fx-pref-height: 50px; -fx-cursor: hand;");
+            login.setStyle("-fx-background-color: #1E90FF; -fx-background-radius: 0; -fx-pref-width: 120px; -fx-pref-height: 30px; -fx-cursor: hand; -fx-border-color: #000000; -fx-border-width: 1px;");
         });
+
         // logo1.setFitHeight(50);
         // logo1.setFitWidth(50);
         login.setOnAction(e -> { String usernameInput = usernameField.getText() ; String passwordInput = passwordField.getText();
@@ -171,13 +171,13 @@ public class App extends Application {
         // Tombol daftar
         Button daftar = new Button("DAFTAR");
         daftar.setFont(new Font("Retro Warmth", 15));
-        daftar.setStyle("-fx-background-color: #1E90FF; -fx-background-radius: 480; -fx-pref-width: 120px; -fx-pref-height: 50px; -fx-cursor: hand;");
+        daftar.setStyle("-fx-background-color: #1E90FF; -fx-background-radius: 0; -fx-pref-width: 120px; -fx-pref-height: 30px; -fx-cursor: hand;  -fx-border-color: #000000;");
         daftar.setAlignment(Pos.CENTER);
         daftar.setOnMouseEntered(e -> {
-            daftar.setStyle("-fx-background-color: #1E90FF;-fx-background-radius: 180; -fx-pref-width: 120px; -fx-pref-height: 50px; -fx-cursor: hand;");
+            daftar.setStyle("-fx-background-color: #1E90FF;-fx-background-radius: 0; -fx-pref-width: 120px; -fx-pref-height: 30px; -fx-cursor: hand;  -fx-border-color: #000000;");
         });
         daftar.setOnMouseExited(e -> {
-            daftar.setStyle("-fx-background-color: #1E90FF; -fx-background-radius: 180; -fx-pref-width: 120px; -fx-pref-height: 50px; -fx-cursor: hand;");
+            daftar.setStyle("-fx-background-color: #1E90FF; -fx-background-radius: 0; -fx-pref-width: 120px; -fx-pref-height: 30px; -fx-cursor: hand; -fx-border-color: #000000;");
         });
         
         // VBox daftarLayout = new VBox();
