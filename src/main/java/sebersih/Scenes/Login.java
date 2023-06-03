@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 
 public class Login {
     private Stage primaryStage;
+    public String userName;
 
     public Login(Stage primaryStage){
         this.primaryStage=primaryStage;
@@ -82,6 +83,7 @@ public class Login {
                 int passwordInt = Integer.parseInt(passwordInput);
                 if (usernameInput.matches("[a-zA-Z]+") && passwordInt >= 0) {
                     Menu menu = new Menu(primaryStage);
+                    menu.userName = usernameField.getText();
                     menu.show();
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);

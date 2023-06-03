@@ -15,5 +15,5 @@ public abstract class DateAbs {
         this.tanggal = tanggal;
     }
 
-    public abstract String tanggalSekarang();
+    public abstract String getTanggalSekarang();
 }

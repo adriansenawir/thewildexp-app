@@ -21,6 +21,7 @@ public class Menu {
     private int totalHarga = 0;
     private Label totalLabel;
     private Stage primaryStage;
+    public String userName;
 
     public Menu(Stage primaryStage){
         this.primaryStage = primaryStage;
@@ -240,7 +241,7 @@ public class Menu {
         buttoncetak.setGraphic(logo2);
         buttoncetak.setOnAction(e -> {
             TamStruk tamStruk = new TamStruk(primaryStage, totalHarga);
-            tamStruk.show();
+            tamStruk.show(userName);
         });
         buttoncetak.setOnMouseEntered(e ->{
             buttoncetak.setStyle("-fx-background-color: #A1ABB6; -fx-cursor: hand;");

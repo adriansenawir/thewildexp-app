@@ -15,6 +15,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import sebersih.model.DateExt;
+
 import java.io.IOException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -24,13 +26,15 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 public class TamStruk {
     private int totalHarga;
     private Stage primaryStage;
+    private String userName;
 
     public TamStruk(Stage primaryStage, int totalHarga){
         this.primaryStage = primaryStage;
         this.totalHarga = totalHarga;
     }
 
-    public void show(){
+    public void show(String userName){
+        this.userName = userName;
         // Membuat tampilan struk seperti kertas
         StackPane stackPane = new StackPane();
         GridPane strukPane = new GridPane();
@@ -64,15 +68,22 @@ public class TamStruk {
         strukPane.add(alamatLabel, 0, 2, 2, 1);
 
         // Tanggal
-        Label tanggalLabel = new Label("Tanggal: " + LocalDate.now().toString());
+        DateExt dateExt = new DateExt(null);
+        Label tanggalLabel = new Label("Tanggal: " + dateExt.getTanggalSekarang());
         tanggalLabel.setFont(new Font("Arial", 15));
         strukPane.add(tanggalLabel, 0, 3, 2, 1);
+
+        //nama kasir
+        Label namaKasir = new Label("Kasir: "+userName);
+        namaKasir.setFont(new Font("Arial", 15));
+        namaKasir.setStyle("-fx-font-weight: bold; ");
+        strukPane.add(namaKasir, 0, 4, 2, 1);
 
         // Daftar pembelian
         Label daftarLabel = new Label("Daftar Pembelian:");
         daftarLabel.setFont(new Font("Arial", 15));
         daftarLabel.setStyle("-fx-font-weight: bold; ");
-        strukPane.add(daftarLabel, 0, 4, 2, 1);
+        strukPane.add(daftarLabel, 0, 5, 2, 1);
 
         // List pembelian
 
@@ -80,7 +91,7 @@ public class TamStruk {
         Label totalLabel = new Label("Total: Rp." + totalHarga);
         totalLabel.setFont(new Font("Arial", 15));
         totalLabel.setStyle("-fx-font-weight: bold; ");
-        strukPane.add(totalLabel, 0, 5, 2, 1);
+        strukPane.add(totalLabel, 0, 6, 2, 1);
 
         // Button OK
         Button okButton = new Button("OK CETAK");
@@ -88,11 +99,11 @@ public class TamStruk {
         okButton.setOnAction(e -> {
             pdfkan();
         });
-        strukPane.add(okButton, 0, 6, 2, 1);
+        strukPane.add(okButton, 0, 7, 2, 1);
         GridPane.setHalignment(okButton, HPos.CENTER);
 
         // Membuat tampilan struk sebagai scene baru
-        Scene strukScene = new Scene(strukPane, 300, 400);
+        Scene strukScene = new Scene(strukPane, 300, 450);
         Stage strukStage = new Stage();
         strukStage.initModality(Modality.APPLICATION_MODAL); 
         strukStage.setTitle("Struk Pembelian");
@@ -116,7 +127,6 @@ public class TamStruk {
             contentStream.newLineAtOffset(50, 700);
             contentStream.showText("SEBERSIH SHOES & CARE");
             contentStream.endText();
-            
 
             contentStream.setFont(PDType1Font.HELVETICA, 15);
             contentStream.beginText();
@@ -126,13 +136,13 @@ public class TamStruk {
 
             contentStream.setFont(PDType1Font.HELVETICA, 15);
             contentStream.beginText();
-            contentStream.newLineAtOffset(50, 640);
+            contentStream.newLineAtOffset(50, 650);
             contentStream.showText("MAKASSAR");
             contentStream.endText();
 
             contentStream.setFont(PDType1Font.HELVETICA, 15);
             contentStream.beginText();
-            contentStream.newLineAtOffset(50, 620);
+            contentStream.newLineAtOffset(50, 630);
             contentStream.showText("0896 0212 8837");
             contentStream.endText();
 
@@ -142,9 +152,15 @@ public class TamStruk {
             contentStream.showText("Tanggal: " + LocalDate.now().toString());
             contentStream.endText();
 
-            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 15);
+            contentStream.setFont(PDType1Font.HELVETICA, 12);
             contentStream.beginText();
             contentStream.newLineAtOffset(50, 570);
+            contentStream.showText("Kasir: " + userName);
+            contentStream.endText();
+
+            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 15);
+            contentStream.beginText();
+            contentStream.newLineAtOffset(50, 540);
             contentStream.showText("Daftar Pembelian:");
             contentStream.endText();
 
@@ -152,7 +168,7 @@ public class TamStruk {
 
             contentStream.setFont(PDType1Font.HELVETICA_BOLD, 15);
             contentStream.beginText();
-            contentStream.newLineAtOffset(50, 540);
+            contentStream.newLineAtOffset(50, 510);
             contentStream.showText("Total: Rp." + totalHarga);
             contentStream.endText();
 

@@ -9,7 +9,7 @@ public class DateExt extends DateAbs{
     }
 
     @Override
-    public String tanggalSekarang() {
+    public String getTanggalSekarang() {
         LocalDate localDate = LocalDate.now();
         return localDate.toString();
     }
