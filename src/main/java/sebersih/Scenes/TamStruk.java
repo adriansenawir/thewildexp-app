@@ -106,7 +106,7 @@ public class TamStruk {
         Scene strukScene = new Scene(strukPane, 300, 450);
         Stage strukStage = new Stage();
         strukStage.initModality(Modality.APPLICATION_MODAL); 
-        strukStage.setTitle("Struk Pembelian");
+        strukStage.setTitle("Struk");
         strukStage.setScene(strukScene);
         strukStage.show();
     }
@@ -152,7 +152,7 @@ public class TamStruk {
             contentStream.showText("Tanggal: " + LocalDate.now().toString());
             contentStream.endText();
 
-            contentStream.setFont(PDType1Font.HELVETICA, 12);
+            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
             contentStream.beginText();
             contentStream.newLineAtOffset(50, 570);
             contentStream.showText("Kasir: " + userName);

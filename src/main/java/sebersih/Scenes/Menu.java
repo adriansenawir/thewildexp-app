@@ -260,7 +260,7 @@ public class Menu {
 
         Scene scene = new Scene(layout, 400, 600);
 
-        primaryStage.setTitle("Button Harga");
+        primaryStage.setTitle("Menu");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
