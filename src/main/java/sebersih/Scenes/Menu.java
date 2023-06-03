@@ -2,6 +2,8 @@ package sebersih.Scenes;
 
 import java.io.InputStream;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -16,15 +18,21 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import sebersih.Datasources.BarangDataSource;
+import sebersih.model.Barang;
 
 public class Menu {
     private int totalHarga = 0;
     private Label totalLabel;
     private Stage primaryStage;
     public String userName;
+    List<String> selectItem = new ArrayList<>();
+
+    final List<Barang> listBarang;
 
     public Menu(Stage primaryStage){
         this.primaryStage = primaryStage;
+        this.listBarang = BarangDataSource.getListBarang();
         // this.totalHarga = totalHarga;
     }
 
@@ -104,109 +112,44 @@ public class Menu {
         gridpaneatas.add(clear, 1, 0);
         GridPane.setValignment(clear, VPos.CENTER);
 
+          //vbox
+        VBox layout = new VBox();
+        layout.setStyle("-fx-background-color: #CACDCB;");
+        layout.setAlignment(Pos.TOP_CENTER);
+        layout.getChildren().addAll( palingatas,gridpaneatas);
+
+        
+
+        // selectItem.clear();
         // List 1
-        GridPane daftar1 = new GridPane();
-        daftar1.setAlignment(Pos.TOP_LEFT);
-        daftar1.setHgap(150);
-        daftar1.setVgap(15);
-        daftar1.setPadding(new Insets(30, 20, 20, 39));
+        for (int i=0;i<listBarang.size();i++) {
+            final int index = i;
+            GridPane daftar = new GridPane();
+            daftar.setAlignment(Pos.TOP_LEFT);
+            daftar.setHgap(150);
+            daftar.setVgap(15);
+            daftar.setPadding(new Insets(15, 20, 15, 39));
 
-        Label namaDaftar1 = new Label("Clean Wash Easy \n Rp. 30.000");
-        namaDaftar1.setFont(new Font("ROCKWELL", 15));
-        namaDaftar1.setStyle("-fx-font-weight: bold;");
-        namaDaftar1.setAlignment(Pos.TOP_LEFT);
-        daftar1.add(namaDaftar1, 0, 0);
-        GridPane.setHalignment(namaDaftar1, HPos.CENTER);
+            Label namaDaftar1 = new Label(listBarang.get(i).getNama() + "\nRp. " + listBarang.get(i).getHarga());
+            namaDaftar1.setFont(new Font("ROCKWELL", 15));
+            namaDaftar1.setStyle("-fx-font-weight: bold;");
+            // namaDaftar1.setAlignment(Pos.TOP_LEFT);
+            daftar.add(namaDaftar1, 0, 0);
+            GridPane.setHalignment(namaDaftar1, HPos.LEFT);
 
-        Button hargaButton1 = createHargaButton(30000, namaDaftar1);
-        hargaButton1.setAlignment(Pos.TOP_RIGHT);
-        hargaButton1.setStyle("-fx-background-color: #FFFFFF;");
-        hargaButton1.setOnMouseEntered(e ->{
-            hargaButton1.setStyle("-fx-background-color: #A1ABB6;-fx-cursor: hand;");
-        });
-        hargaButton1.setOnMouseExited(e -> {
+            Button hargaButton1 = createHargaButton(listBarang.get(i).getHarga(), namaDaftar1, index);
+            // hargaButton1.setAlignment(Pos.TOP_RIGHT);
             hargaButton1.setStyle("-fx-background-color: #FFFFFF;");
-        });
-        daftar1.add(hargaButton1, 1, 0);
-        GridPane.setValignment(hargaButton1, VPos.CENTER);
-
-        //list 2
-        GridPane daftar2 = new GridPane();
-        daftar2.setAlignment(Pos.TOP_LEFT);
-        daftar2.setHgap(150);
-        daftar2.setVgap(15);
-        daftar2.setPadding(new Insets(20, 20, 20, 39));
-
-        Label namaDaftar2 = new Label("Clean Wash Hard \n Rp. 35.000");
-        namaDaftar2.setFont(new Font("ROCKWELL", 15));
-        namaDaftar2.setStyle("-fx-font-weight: bold;");
-        namaDaftar2.setAlignment(Pos.TOP_LEFT);
-        daftar2.add(namaDaftar2, 0, 0);
-        GridPane.setHalignment(namaDaftar2, HPos.CENTER);
-
-        Button hargaButton2 = createHargaButton(35000, namaDaftar2);
-        hargaButton2.setAlignment(Pos.TOP_RIGHT);
-        hargaButton2.setStyle("-fx-background-color: #FFFFFF;");
-        hargaButton2.setOnMouseEntered(e ->{
-            hargaButton2.setStyle("-fx-background-color: #A1ABB6; -fx-cursor: hand;");
-        });
-        hargaButton2.setOnMouseExited(e -> {
-            hargaButton2.setStyle("-fx-background-color: #FFFFFF;");
-        });
-        daftar2.add(hargaButton2, 1, 0);
-        GridPane.setValignment(hargaButton2, VPos.CENTER);
-
-        //list 3
-        GridPane daftar3 = new GridPane();
-        daftar3.setAlignment(Pos.TOP_LEFT);
-        daftar3.setHgap(193);
-        daftar3.setVgap(15);
-        daftar3.setPadding(new Insets(20, 20, 20, 39));
-
-        Label namaDaftar3 = new Label("Flash Wash \n Rp. 25.000");
-        namaDaftar3.setFont(new Font("ROCKWELL", 15));
-        namaDaftar3.setStyle("-fx-font-weight: bold;");
-        namaDaftar3.setAlignment(Pos.TOP_LEFT);
-        daftar3.add(namaDaftar3, 0, 0);
-        GridPane.setHalignment(namaDaftar3, HPos.CENTER);
-
-        Button hargaButton3 = createHargaButton(25000, namaDaftar3);
-        hargaButton3.setAlignment(Pos.TOP_RIGHT);
-        hargaButton3.setStyle("-fx-background-color: #FFFFFF;");
-        hargaButton3.setOnMouseEntered(e->{
-            hargaButton3.setStyle("-fx-background-color: #A1ABB6; -fx-cursor: hand; ");
-        });
-        hargaButton3.setOnMouseExited(e -> {
-            hargaButton3.setStyle("-fx-background-color: #FFFFFF;");
-        });
-        daftar3.add(hargaButton3, 1, 0);
-        GridPane.setValignment(hargaButton3, VPos.CENTER);
-
-        //list 4
-        GridPane daftar4 = new GridPane();
-        daftar4.setAlignment(Pos.TOP_LEFT);
-        daftar4.setHgap(198);
-        daftar4.setVgap(15);
-        daftar4.setPadding(new Insets(20, 20, 20, 39));
-
-        Label namaDaftar4 = new Label("Kids Shoes \n Rp. 20.000");
-        namaDaftar4.setFont(new Font("ROCKWELL", 15));
-        namaDaftar4.setStyle("-fx-font-weight: bold;");
-        namaDaftar4.setAlignment(Pos.TOP_LEFT);
-        daftar4.add(namaDaftar4, 0, 0);
-        GridPane.setHalignment(namaDaftar4, HPos.CENTER);
-
-        Button hargaButton4 = createHargaButton(20000, namaDaftar4);
-        hargaButton4.setAlignment(Pos.TOP_RIGHT);
-        hargaButton4.setStyle("-fx-background-color: #FFFFFF;");
-        hargaButton4.setOnMouseEntered(e ->{
-            hargaButton4.setStyle("-fx-background-color: #A1ABB6;-fx-cursor: hand;");
-        });
-        hargaButton4.setOnMouseExited(e -> {
-            hargaButton4.setStyle("-fx-background-color: #FFFFFF;");
-        });
-        daftar4.add(hargaButton4, 1, 0);
-        GridPane.setValignment(hargaButton4, VPos.CENTER);
+            hargaButton1.setOnMouseEntered(e ->{
+                hargaButton1.setStyle("-fx-background-color: #A1ABB6;-fx-cursor: hand;");
+            });
+            hargaButton1.setOnMouseExited(e -> {
+                hargaButton1.setStyle("-fx-background-color: #FFFFFF;");
+            });
+            daftar.add(hargaButton1, 1, 0);
+            GridPane.setHalignment(hargaButton1, HPos.RIGHT);
+            layout.getChildren().add(daftar);
+        }
 
         //info harga button
         GridPane total = new GridPane();
@@ -216,7 +159,6 @@ public class Menu {
         total.setPadding(new Insets(18, 0, 20, 0));
         // total.setStyle("-fx-background-color: #A1ABB6");
         
-
         totalLabel = new Label("Total: Rp." + totalHarga);
         totalLabel.setFont(new Font("ARIAL", 20));
         totalLabel.setAlignment(Pos.BOTTOM_CENTER);
@@ -240,8 +182,9 @@ public class Menu {
         buttoncetak.setAlignment(Pos.BOTTOM_CENTER);
         buttoncetak.setGraphic(logo2);
         buttoncetak.setOnAction(e -> {
-            TamStruk tamStruk = new TamStruk(primaryStage, totalHarga);
+            TamStruk tamStruk = new TamStruk(primaryStage, totalHarga, selectItem);
             tamStruk.show(userName);
+            // selectItem.clear();
         });
         buttoncetak.setOnMouseEntered(e ->{
             buttoncetak.setStyle("-fx-background-color: #A1ABB6; -fx-cursor: hand;");
@@ -250,22 +193,18 @@ public class Menu {
             buttoncetak.setStyle("-fx-background-color: #394867; -fx-cursor: hand;");
         });
 
-        //vbox
-        VBox layout = new VBox();
-        layout.setStyle("-fx-background-color: #CACDCB;");
-        layout.setAlignment(Pos.TOP_CENTER);
         // layout.setPadding(new Insets(2));
-        layout.getChildren().addAll(palingatas,gridpaneatas,daftar1,daftar2,daftar3,daftar4, total,buttoncetak);
+        layout.getChildren().addAll(total,buttoncetak);
         // layout.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(layout, 400, 600);
 
-        primaryStage.setTitle("Button Harga");
+        primaryStage.setTitle("Menu");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-        private Button createHargaButton(int harga, Label label) {
+        private Button createHargaButton(int harga, Label label, int index) {
             InputStream inputlogotambah = getClass().getResourceAsStream("/image/tambah.png");
             Image urltambah = new Image(inputlogotambah);
             ImageView logotambah = new ImageView(urltambah);
@@ -280,7 +219,7 @@ public class Menu {
                 DecimalFormat decimalFormat = new DecimalFormat("#,##0");
                 String formattedTotalHarga = decimalFormat.format(totalHarga);
                 totalLabel.setText("Total: Rp." + formattedTotalHarga);
-
+                selectItem.add(listBarang.get(index).getNama());
             });
             return hargaButton;
         }

@@ -1,6 +1,7 @@
 package sebersih.Scenes;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -13,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sebersih.model.DateExt;
@@ -26,11 +28,15 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 public class TamStruk {
     private int totalHarga;
     private Stage primaryStage;
+    private List<String> selectItem;
+    private String select = "";
+
     private String userName;
 
-    public TamStruk(Stage primaryStage, int totalHarga){
+    public TamStruk(Stage primaryStage, int totalHarga, List<String> selectItem){
         this.primaryStage = primaryStage;
         this.totalHarga = totalHarga;
+        this.selectItem = selectItem;
     }
 
     public void show(String userName){
@@ -86,12 +92,25 @@ public class TamStruk {
         strukPane.add(daftarLabel, 0, 5, 2, 1);
 
         // List pembelian
+        for (String string : selectItem) {
+            select += string;
+            if (selectItem.size() > 1) {
+                select += ",";
+            } else {
+                select += " ";
+            }
+        }
+        
+        Label listLabel = new Label(select);
+        strukPane.add(listLabel, 0, 6, 2, 1);
+
+        
 
         // Total pembelian
         Label totalLabel = new Label("Total: Rp." + totalHarga);
         totalLabel.setFont(new Font("Arial", 15));
         totalLabel.setStyle("-fx-font-weight: bold; ");
-        strukPane.add(totalLabel, 0, 6, 2, 1);
+        strukPane.add(totalLabel, 0, 7, 2, 1);
 
         // Button OK
         Button okButton = new Button("OK CETAK");
@@ -99,11 +118,11 @@ public class TamStruk {
         okButton.setOnAction(e -> {
             pdfkan();
         });
-        strukPane.add(okButton, 0, 7, 2, 1);
+        strukPane.add(okButton, 0, 8, 2, 1);
         GridPane.setHalignment(okButton, HPos.CENTER);
 
         // Membuat tampilan struk sebagai scene baru
-        Scene strukScene = new Scene(strukPane, 300, 450);
+        Scene strukScene = new Scene(strukPane, 300, 500);
         Stage strukStage = new Stage();
         strukStage.initModality(Modality.APPLICATION_MODAL); 
         strukStage.setTitle("Struk Pembelian");
@@ -121,7 +140,6 @@ public class TamStruk {
         try {
             PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
-            
             contentStream.setFont(PDType1Font.HELVETICA_BOLD, 20);
             contentStream.beginText();
             contentStream.newLineAtOffset(50, 700);
@@ -152,7 +170,7 @@ public class TamStruk {
             contentStream.showText("Tanggal: " + LocalDate.now().toString());
             contentStream.endText();
 
-            contentStream.setFont(PDType1Font.HELVETICA, 12);
+            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 14);
             contentStream.beginText();
             contentStream.newLineAtOffset(50, 570);
             contentStream.showText("Kasir: " + userName);
@@ -165,10 +183,15 @@ public class TamStruk {
             contentStream.endText();
 
             // Menambahkan daftar pembelian dan total ke PDF
+            contentStream.setFont(PDType1Font.HELVETICA, 15);
+            contentStream.beginText();
+            contentStream.newLineAtOffset(50, 520);
+            contentStream.showText(""+ select);
+            contentStream.endText();
 
             contentStream.setFont(PDType1Font.HELVETICA_BOLD, 15);
             contentStream.beginText();
-            contentStream.newLineAtOffset(50, 510);
+            contentStream.newLineAtOffset(50, 450);
             contentStream.showText("Total: Rp." + totalHarga);
             contentStream.endText();
 
