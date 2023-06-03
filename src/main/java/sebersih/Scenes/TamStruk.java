@@ -74,7 +74,7 @@ public class TamStruk {
         strukPane.add(tanggalLabel, 0, 3, 2, 1);
 
         //nama kasir
-        Label namaKasir = new Label("Kasir: "+userName);
+        Label namaKasir = new Label("Kasir : "+userName);
         namaKasir.setFont(new Font("Arial", 15));
         namaKasir.setStyle("-fx-font-weight: bold; ");
         strukPane.add(namaKasir, 0, 4, 2, 1);

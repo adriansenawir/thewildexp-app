@@ -111,6 +111,7 @@ public class Login {
         
         Scene scene = new Scene(layout, 400, 600);
         primaryStage.setScene(scene);
+        primaryStage.setTitle("Login");
         primaryStage.show();
     }
 }
