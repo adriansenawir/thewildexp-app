@@ -14,7 +14,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sebersih.model.DateExt;
@@ -125,7 +124,7 @@ public class TamStruk {
         Scene strukScene = new Scene(strukPane, 300, 500);
         Stage strukStage = new Stage();
         strukStage.initModality(Modality.APPLICATION_MODAL); 
-        strukStage.setTitle("Struk Pembelian");
+        strukStage.setTitle("Struk");
         strukStage.setScene(strukScene);
         strukStage.show();
     }

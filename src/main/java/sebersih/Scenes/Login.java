@@ -110,6 +110,7 @@ public class Login {
         layout.getChildren().addAll(labelkasir, logo, labelsebersih, usernameLayout, passwordLayout, login);
         
         Scene scene = new Scene(layout, 400, 600);
+        primaryStage.setTitle("Login");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
